@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-barba="wrapper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remediation Registry — C.R.E.E.D. Institute</title>
+    <meta name="description" content="Every publicly-acknowledged limitation of a C.R.E.E.D.-monitored product, the governance position on it, and what is being done — live from the A.R.C.H.I.E. platform.">
+    <meta name="theme-color" content="#0a0a1a">
+    <link rel="canonical" href="https://creed-ai.org/remediation.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="C.R.E.E.D. Institute">
+    <meta property="og:title" content="Remediation Registry — C.R.E.E.D. Institute">
+    <meta property="og:description" content="Every publicly-acknowledged product limitation, the governance position on it, and what is being done about it.">
+    <meta property="og:url" content="https://creed-ai.org/remediation.html">
+    <meta property="og:image" content="https://creed-ai.org/images/creed-og.svg">
+    <meta property="og:locale" content="en_CA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Remediation Registry — C.R.E.E.D. Institute">
+    <meta name="twitter:description" content="Every publicly-acknowledged product limitation, the governance position on it, and what is being done about it.">
+    <meta name="twitter:image" content="https://creed-ai.org/images/creed-og.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Orbitron:wght@400;500;700;900&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css?v=20260407u">
+    <link rel="stylesheet" href="css/reduced-motion.css">
+    <style>
+        .rr-wrap { max-width: 900px; margin: 0 auto; }
+        .rr-summary { display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; margin:0 0 2.5rem; }
+        .rr-pill { display:inline-flex; align-items:center; gap:0.5rem; font-family:'IBM Plex Mono',monospace;
+            font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:#94a3b8;
+            padding:0.4rem 0.85rem; border-radius:20px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
+        .rr-pill .rr-dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+        .rr-pill .rr-n { color:#fff; font-weight:700; }
+        .rr-list { display:flex; flex-direction:column; gap:1.1rem; }
+        .rr-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+            border-left:3px solid #8b5cf6; border-radius:12px; padding:1.5rem 1.6rem; scroll-margin-top:6rem; }
+        .rr-card:target { border-color:#c9a44c; box-shadow:0 0 0 1px #c9a44c, 0 0 28px rgba(201,164,76,0.12); }
+        .rr-card-head { display:flex; flex-wrap:wrap; align-items:center; gap:0.6rem; margin-bottom:0.6rem; }
+        .rr-source { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em;
+            color:#94a3b8; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:4px; padding:0.15rem 0.5rem; }
+        .rr-category { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; color:#64748b; }
+        .rr-status { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em;
+            padding:0.15rem 0.6rem; border-radius:20px; margin-left:auto; }
+        .rr-title { font-family:'Orbitron',sans-serif; font-size:1.05rem; font-weight:700; color:#f1f5f9; width:100%; margin:0.2rem 0 0; }
+        .rr-quote { border-left:2px solid #8b5cf6; padding:0.3rem 0 0.3rem 0.9rem; margin:1rem 0; font-style:italic; color:#cbd5e1; font-size:0.92rem; }
+        .rr-block { margin-top:0.9rem; }
+        .rr-block-label { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.1em; color:#c9a44c; margin-bottom:0.25rem; }
+        .rr-block p { font-size:0.92rem; line-height:1.65; color:#cbd5e1; margin:0; }
+        .rr-meta { display:flex; flex-wrap:wrap; gap:1.1rem; margin-top:1.1rem; padding-top:0.85rem;
+            border-top:1px solid rgba(255,255,255,0.08); font-size:0.75rem; color:#64748b; }
+        .rr-meta b { color:#cbd5e1; font-weight:600; }
+        .rr-permalink { margin-left:auto; color:#c9a44c; text-decoration:none; }
+        .rr-permalink:hover { text-decoration:underline; }
+        .rr-status-line { text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:#64748b; margin:1.5rem 0 0; }
+        .rr-status-line .rr-dot { width:8px; height:8px; border-radius:50%; display:inline-block; background:#22c55e; margin-right:0.4rem; vertical-align:middle; }
+    </style>
+</head>
+<body>
+    <!-- Global background layers -->
+    <div class="aurora"></div>
+    <div class="dot-grid"></div>
+    <div class="noise-overlay"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Language Overlay -->
+    <div class="lang-overlay" id="langOverlay">
+        <div class="lang-overlay__panel">
+            <button class="lang-overlay__close" aria-label="Close">&times;</button>
+            <h3 class="lang-overlay__title">Select Language</h3>
+            <div class="lang-overlay__grid">
+                <button class="lang-overlay__btn" data-lang="en">English</button>
+                <button class="lang-overlay__btn" data-lang="fr">Fran&ccedil;ais</button>
+                <button class="lang-overlay__btn" data-lang="es">Espa&ntilde;ol</button>
+                <button class="lang-overlay__btn" data-lang="pt">Portugu&ecirc;s</button>
+                <button class="lang-overlay__btn" data-lang="de">Deutsch</button>
+                <button class="lang-overlay__btn" data-lang="zh">&#20013;&#25991;</button>
+                <button class="lang-overlay__btn" data-lang="ar">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</button>
+                <button class="lang-overlay__btn" data-lang="he">&#1506;&#1489;&#1512;&#1497;&#1514;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="mainNav">
+        <div class="nav__inner container">
+            <a href="/" class="nav__logo"><span class="nav__logo-text">C.R.E.E.D.</span></a>
+            <div class="nav__links" id="navLinks">
+                <a href="about.html" class="nav__link" data-i18n="nav.about">About</a>
+                <a href="programs.html" class="nav__link" data-i18n="nav.programs">Programs</a>
+                <a href="research.html" class="nav__link" data-i18n="nav.research">Research</a>
+                <a href="governance.html" class="nav__link" data-i18n="nav.governance">Governance</a>
+                <a href="platform.html" class="nav__link" data-i18n="nav.platform">Platform</a>
+                <a href="manifesto.html" class="nav__link" data-i18n="nav.manifesto">Manifesto</a>
+                <a href="news.html" class="nav__link" data-i18n="nav.news">News</a>
+                <a href="get-involved.html" class="nav__link" data-i18n="nav.get_involved">Get Involved</a>
+                <a href="donate.html" class="nav__link nav__link--cta" data-i18n="nav.donate">Donate</a>
+            </div>
+            <button class="nav__lang" id="langToggle" aria-label="Change language">EN</button>
+            <button class="nav__menu-btn" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <main data-barba="container" data-barba-namespace="remediation">
+
+        <!-- Hero -->
+        <section class="hero" style="min-height:auto;padding-top:calc(var(--nav-height) + 4rem);padding-bottom:2rem;">
+            <div class="hero__content container" style="text-align:center;">
+                <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);color:#c9a44c;letter-spacing:0.1em;margin-bottom:1rem;" data-i18n="remediation.hero.title">Remediation Registry</h1>
+                <p style="color:#94a3b8;max-width:680px;margin:0 auto;font-size:1.1rem;line-height:1.7;">
+                    Radical transparency means naming our own limitations and saying what we do about each one. This registry tracks every publicly-acknowledged limitation of a C.R.E.E.D.-monitored product — why it exists, the governance position, and who owns it.
+                </p>
+            </div>
+        </section>
+
+        <!-- Registry -->
+        <section style="padding:1rem 0 4rem;">
+            <div class="container rr-wrap">
+                <div class="rr-summary" id="rr-summary"></div>
+                <div class="rr-list" id="rr-list">
+                    <div style="text-align:center;color:#64748b;font-family:'IBM Plex Mono',monospace;font-size:0.85rem;padding:2rem;">Loading registry…</div>
+                </div>
+                <div class="rr-status-line" id="rr-status"></div>
+                <p style="text-align:center;color:#64748b;font-size:0.78rem;margin-top:2rem;">
+                    Machine-readable source:
+                    <a href="https://creed.kytranempowerment.com/api/public/remediations" style="color:#c9a44c;">/api/public/remediations</a>
+                    &middot; canonical page: <a href="https://creed.kytranempowerment.com/remediation" style="color:#c9a44c;">creed.kytranempowerment.com/remediation</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner container">
+            <div class="footer__brand">
+                <span class="footer__logo">C.R.E.E.D. INSTITUTE</span>
+                <p class="footer__tagline">Preventive AI Ethics</p>
+            </div>
+            <div class="footer__links">
+                <a href="about.html">About</a>
+                <a href="programs.html">Programs</a>
+                <a href="research.html">Research</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="governance.html">Governance</a>
+                <a href="remediation.html">Remediation Registry</a>
+                <a href="policy.html">Policy</a>
+                <a href="manifesto.html">Manifesto</a>
+                <a href="news.html">News</a>
+                <a href="press.html">Press</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="donate.html">Donate</a>
+                <a href="partners.html">Partners</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer__copy" data-i18n="footer.copyright">&copy; 2026 C.R.E.E.D. Institute. Canadian Registered Nonprofit. All rights reserved.</div>
+            <p class="footer__initiative" data-i18n="footer.initiative">A founding initiative of Kytran Empowerment Inc.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script defer src="js/lib/gsap.min.js"></script>
+    <script defer src="js/lib/ScrollTrigger.min.js"></script>
+    <script defer src="js/lib/lenis.min.js"></script>
+    <script defer src="js/lib/splitting.min.js"></script>
+    <script defer src="js/lib/barba.min.js"></script>
+    <script defer src="js/effects.js"></script>
+    <script defer src="js/nav.js?v=20260407u"></script>
+    <script defer src="js/transitions.js"></script>
+    <script defer src="js/app.js"></script>
+    <script defer src="js/i18n.js"></script>
+    <!-- Live Remediation Registry fetch (with static fallback) -->
+    <script>
+    (function () {
+        var API_URL = 'https://creed.kytranempowerment.com/api/public/remediations';
+        var FALLBACK_URL = 'data/remediations.json';
+
+        var STATUS_COLOR = {
+            accepted: '#8b5cf6', in_progress: '#22d3ee', planned: '#eab308', resolved: '#22c55e'
+        };
+
+        function el(tag, styleText, text) {
+            var e = document.createElement(tag);
+            if (styleText) e.style.cssText = styleText;
+            if (text !== undefined) e.textContent = text; // textContent — XSS-safe
+            return e;
+        }
+
+        function renderSummary(statusCounts, statusMeta) {
+            var box = document.getElementById('rr-summary');
+            if (!box) return;
+            while (box.firstChild) box.removeChild(box.firstChild);
+            Object.keys(statusCounts || {}).forEach(function (status) {
+                var meta = (statusMeta && statusMeta[status]) || {};
+                var color = meta.color || STATUS_COLOR[status] || '#94a3b8';
+                var pill = el('span'); pill.className = 'rr-pill';
+                var dot = el('span'); dot.className = 'rr-dot'; dot.style.background = color;
+                var n = el('span', null, String(statusCounts[status])); n.className = 'rr-n';
+                pill.appendChild(dot); pill.appendChild(n);
+                pill.appendChild(document.createTextNode(' ' + (meta.label || status)));
+                box.appendChild(pill);
+            });
+        }
+
+        function renderCard(item, statusMeta) {
+            var meta = (statusMeta && statusMeta[item.status]) || {};
+            var color = meta.color || STATUS_COLOR[item.status] || '#8b5cf6';
+            var label = item.status_label || (meta.label) || item.status;
+
+            var card = el('article'); card.className = 'rr-card';
+            card.id = item.slug; card.style.borderLeftColor = color;
+
+            var head = el('div'); head.className = 'rr-card-head';
+            var src = el('span', null, item.source_product); src.className = 'rr-source';
+            var cat = el('span', null, item.category || ''); cat.className = 'rr-category';
+            var st = el('span', null, label); st.className = 'rr-status';
+            st.style.cssText += 'background:' + color + '22;color:' + color + ';border:1px solid ' + color + '44;';
+            var title = el('h2', null, item.title); title.className = 'rr-title';
+            head.appendChild(src); head.appendChild(cat); head.appendChild(st); head.appendChild(title);
+            card.appendChild(head);
+
+            var quote = el('div', null, '“' + item.limitation + '”'); quote.className = 'rr-quote';
+            card.appendChild(quote);
+
+            [['Why this exists', item.description], ['What we do about it', item.remediation_plan]].forEach(function (pair) {
+                if (!pair[1]) return;
+                var block = el('div'); block.className = 'rr-block';
+                var lbl = el('div', null, pair[0]); lbl.className = 'rr-block-label';
+                var p = el('p', null, pair[1]);
+                block.appendChild(lbl); block.appendChild(p); card.appendChild(block);
+            });
+
+            var metaRow = el('div'); metaRow.className = 'rr-meta';
+            if (item.owner) { var o = el('span'); o.appendChild(document.createTextNode('Owner: ')); var ob = el('b', null, item.owner); o.appendChild(ob); metaRow.appendChild(o); }
+            if (item.target_date) { var t = el('span'); t.appendChild(document.createTextNode('Target: ')); var tb = el('b', null, item.target_date); t.appendChild(tb); metaRow.appendChild(t); }
+            if (item.updated_at) { var u = el('span'); u.appendChild(document.createTextNode('Updated: ')); var ub = el('b', null, item.updated_at); u.appendChild(ub); metaRow.appendChild(u); }
+            var perma = el('a', null, '#' + item.slug); perma.className = 'rr-permalink'; perma.href = '#' + item.slug;
+            metaRow.appendChild(perma);
+            card.appendChild(metaRow);
+            return card;
+        }
+
+        function render(data, live) {
+            renderSummary(data.status_counts, data.status_meta);
+            var list = document.getElementById('rr-list');
+            while (list.firstChild) list.removeChild(list.firstChild);
+            (data.remediations || []).forEach(function (item) {
+                list.appendChild(renderCard(item, data.status_meta));
+            });
+            var status = document.getElementById('rr-status');
+            if (status) {
+                while (status.firstChild) status.removeChild(status.firstChild);
+                var dot = el('span'); dot.className = 'rr-dot';
+                dot.style.background = live ? '#22c55e' : '#eab308';
+                status.appendChild(dot);
+                status.appendChild(document.createTextNode(
+                    live ? 'Live from creed.kytranempowerment.com' : 'Showing last published snapshot'));
+            }
+            // Jump to anchor once cards exist (deep-link from product pages).
+            if (location.hash) {
+                var target = document.getElementById(location.hash.slice(1));
+                if (target) target.scrollIntoView();
+            }
+        }
+
+        function loadFallback() {
+            fetch(FALLBACK_URL, { cache: 'no-cache' })
+                .then(function (r) { return r.json(); })
+                .then(function (d) { render(d, false); })
+                .catch(function (e) {
+                    var list = document.getElementById('rr-list');
+                    if (list) { list.textContent = 'Registry temporarily unavailable.'; }
+                    console.warn('[RR] fallback error:', e);
+                });
+        }
+
+        function load() {
+            fetch(API_URL, { mode: 'cors', cache: 'no-cache' })
+                .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(function (d) { render(d, true); })
+                .catch(function (e) { console.warn('[RR] live fetch failed, using fallback:', e); loadFallback(); });
+        }
+
+        document.addEventListener('DOMContentLoaded', load);
+    })();
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof I18n !== 'undefined') I18n.init();
+        var langToggle = document.getElementById('langToggle');
+        var langOverlay = document.getElementById('langOverlay');
+        var closeBtn = langOverlay ? langOverlay.querySelector('.lang-overlay__close') : null;
+        if (langToggle && langOverlay) {
+            langToggle.addEventListener('click', function() { langOverlay.classList.add('active'); });
+        }
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() { langOverlay.classList.remove('active'); });
+        }
+        if (langOverlay) {
+            langOverlay.addEventListener('click', function(e) {
+                if (e.target === langOverlay) langOverlay.classList.remove('active');
+            });
+        }
+        document.querySelectorAll('.lang-overlay__btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var lang = this.getAttribute('data-lang');
+                if (typeof I18n !== 'undefined') I18n.setLang(lang);
+                if (langToggle) langToggle.textContent = lang.toUpperCase();
+                document.querySelectorAll('.lang-overlay__btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                if (langOverlay) langOverlay.classList.remove('active');
+            });
+        });
+        if (langToggle && typeof I18n !== 'undefined') {
+            langToggle.textContent = I18n.getLang().toUpperCase();
+        }
+    });
+    </script>
+</body>
+</html>

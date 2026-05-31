@@ -1,0 +1,133 @@
+{
+  "count": 7,
+  "registry": "C.R.E.E.D. Remediation Registry",
+  "remediations": [
+    {
+      "category": "AI Model Constraints",
+      "description": "Local language models reason from their training corpus; they cannot look up events that post-date that corpus or query a live fact store. This is a property of how the models are run, not a configuration bug.",
+      "limitation": "LLM analysis is based on training data (cutoff 2024) — models do not have internet access or real-time fact databases.",
+      "owner": "D.A.R.W.I.N. — Research & Development",
+      "remediation_plan": "Facts are taken from the live article text, not the model's memory: summaries are extractive (drawn from the published body), and the LLM is used for framing, tone and bias interpretation rather than as a source of factual claims. A retrieval-augmented fact-check path (grounding on a live evidence store) is on the research roadmap.",
+      "slug": "wtf-llm-training-cutoff",
+      "source_product": "What The Fact",
+      "status": "accepted",
+      "status_label": "Accepted Trade-off",
+      "target_date": null,
+      "title": "LLM analysis is bounded by the model's training cutoff",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-llm-training-cutoff"
+    },
+    {
+      "category": "Bias & Fairness",
+      "description": "A single model's reading of loaded language is one signal among several. Reasonable analysts — and reasonable models — can disagree on where a given article sits on the spectrum.",
+      "limitation": "Bias scoring reflects the LLM's interpretation of language patterns; it may not match human expert consensus in all cases.",
+      "owner": "B.I.A.S. — News & Media",
+      "remediation_plan": "Bias is computed from multiple independent signals (LLM language analysis, outlet editorial-stance priors, and a separate DistilBERT NLI model) rather than one verdict, and the rationale is shown so readers can judge it themselves. Ongoing calibration measures the scorer against outlet editorial baselines.",
+      "slug": "wtf-bias-vs-human-consensus",
+      "source_product": "What The Fact",
+      "status": "in_progress",
+      "status_label": "In Progress",
+      "target_date": null,
+      "title": "Bias scores may not match human expert consensus",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-bias-vs-human-consensus"
+    },
+    {
+      "category": "Data Coverage",
+      "description": "When the extractor cannot confidently locate a story, it attributes it to the publishing outlet's province rather than guessing a precise location it is not sure of.",
+      "limitation": "Geolocation uses source province as fallback when AI confidence is low (<0.5).",
+      "owner": "L.O.C.A.L. — News & Media",
+      "remediation_plan": "Province-level fallbacks are labelled transparently rather than presented as precise geolocation. The L.O.C.A.L. agent's geo-extraction is being improved to raise the share of articles that clear the confidence threshold.",
+      "slug": "wtf-geolocation-province-fallback",
+      "source_product": "What The Fact",
+      "status": "in_progress",
+      "status_label": "In Progress",
+      "target_date": null,
+      "title": "Geolocation falls back to source province at low confidence",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-geolocation-province-fallback"
+    },
+    {
+      "category": "Throughput & Coverage",
+      "description": "Full LLM analysis is compute-bound. To keep the feed current, each ingest cycle prioritises the highest-signal articles for deep analysis and applies lighter heuristic + editorial scoring to the rest.",
+      "limitation": "Not all articles receive full AI analysis — only priority articles (top 20/cycle) get LLM treatment; all others receive heuristic + source-editorial bias scoring.",
+      "owner": "F.A.C.T. — News & Media",
+      "remediation_plan": "Analysis throughput is being scaled across the agent fleet and a backlog drains lower-priority articles toward full coverage over time. Articles that have not yet had full LLM analysis are scored by transparent heuristic + outlet-editorial methods in the interim.",
+      "slug": "wtf-priority-article-coverage",
+      "source_product": "What The Fact",
+      "status": "in_progress",
+      "status_label": "In Progress",
+      "target_date": null,
+      "title": "Not every article receives full LLM analysis",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-priority-article-coverage"
+    },
+    {
+      "category": "Bias & Fairness",
+      "description": "An outlet's bias profile is a moving aggregate of its analysed coverage. A newly added outlet has little history, so it starts from a documented editorial-stance prior and converges as articles accumulate.",
+      "limitation": "Outlet bias profiles are rolling averages; new outlets are seeded from editorial stance data and refined over time.",
+      "owner": "B.I.A.S. — News & Media",
+      "remediation_plan": "This is the intended design: profiles update as evidence accumulates rather than being fixed labels. Seed priors are sourced from published editorial-stance research and are superseded by measured behaviour as the sample grows.",
+      "slug": "wtf-outlet-bias-rolling-average",
+      "source_product": "What The Fact",
+      "status": "accepted",
+      "status_label": "Accepted Trade-off",
+      "target_date": null,
+      "title": "Outlet bias profiles are rolling averages, seeded for new outlets",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-outlet-bias-rolling-average"
+    },
+    {
+      "category": "Data Coverage",
+      "description": "Where a publisher gates the article body behind a paywall, the full text is not lawfully or technically available to ingest, so analysis is limited to the headline and the publicly-served summary metadata.",
+      "limitation": "Paywalled articles (Postmedia, Torstar) have limited body text — AI analysis relies on title + Open Graph description only.",
+      "owner": "F.A.C.T. — News & Media",
+      "remediation_plan": "Paywalled items are analysed only from the publicly-available title and Open Graph description, and this reduced basis is disclosed rather than hidden. We do not bypass paywalls to obtain body text.",
+      "slug": "wtf-paywalled-body-text",
+      "source_product": "What The Fact",
+      "status": "accepted",
+      "status_label": "Accepted Trade-off",
+      "target_date": null,
+      "title": "Paywalled articles are analysed from title + summary only",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-paywalled-body-text"
+    },
+    {
+      "category": "Bias & Fairness",
+      "description": "The supplementary DistilBERT natural-language-inference model was trained primarily on US data, so its read of Canadian political framing can be imperfect.",
+      "limitation": "DistilBERT Signal 3 (US-trained NLI model) may not map cleanly to Canadian political framing; treated as a second opinion, not ground truth.",
+      "owner": "V.E.R.I.F.Y. — News & Media",
+      "remediation_plan": "Its output is weighted as one second-opinion signal, never as ground truth, and is cross-checked against the LLM and editorial signals. A Canadian-framing fine-tune is planned to improve its domain fit.",
+      "slug": "wtf-distilbert-canadian-framing",
+      "source_product": "What The Fact",
+      "status": "in_progress",
+      "status_label": "In Progress",
+      "target_date": null,
+      "title": "The DistilBERT signal is US-trained and used as a second opinion",
+      "updated_at": "2026-05-31",
+      "url": "https://creed.kytranempowerment.com/remediation#wtf-distilbert-canadian-framing"
+    }
+  ],
+  "status_counts": {
+    "accepted": 3,
+    "in_progress": 4
+  },
+  "status_meta": {
+    "accepted": {
+      "color": "#8b5cf6",
+      "label": "Accepted Trade-off"
+    },
+    "in_progress": {
+      "color": "#22d3ee",
+      "label": "In Progress"
+    },
+    "planned": {
+      "color": "#f59e0b",
+      "label": "Planned"
+    },
+    "resolved": {
+      "color": "#10b981",
+      "label": "Resolved"
+    }
+  }
+}
