@@ -1,0 +1,12 @@
+{
+  "total": 0,
+  "by_status": {
+    "pending": 0,
+    "under_review": 0,
+    "resolved": 0,
+    "denied": 0
+  },
+  "avg_resolution_days": null,
+  "sla_business_days": 5,
+  "resolution_is_human": true
+}
