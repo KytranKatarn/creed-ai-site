@@ -1,0 +1,204 @@
+{
+  "count": 13,
+  "framework": "Human-in-the-loop oversight (EU AI Act Art. 14 aligned)",
+  "oversight": [
+    {
+      "action_type": "Notifications, reminders & briefings",
+      "automation_level": "Fully autonomous",
+      "description": "Agents send notifications, reminders, scheduled briefings and internal log entries without human approval. These are informational and carry no irreversible effect.",
+      "escalation_path": "Recorded in the activity log; no approval gate.",
+      "human_review_trigger": "None — informational only.",
+      "owner": "A.R.C.H.I.E. — Executive Office",
+      "risk_label": "Low — Autonomous",
+      "risk_level": "low",
+      "slug": "routine-notifications",
+      "title": "Routine notifications, reminders and briefings",
+      "url": "https://creed.kytranempowerment.com/oversight#routine-notifications"
+    },
+    {
+      "action_type": "Knowledge-base reads & translation",
+      "automation_level": "Fully autonomous",
+      "description": "Reading the knowledge base, semantic search, and translating existing content are read-only or non-destructive and run autonomously.",
+      "escalation_path": "No gate; covered by routine audit logging.",
+      "human_review_trigger": "None — read-only / non-destructive.",
+      "owner": "C.O.D.E.X. — Documentation & Knowledge",
+      "risk_label": "Low — Autonomous",
+      "risk_level": "low",
+      "slug": "knowledge-read",
+      "title": "Knowledge reads, search and translation",
+      "url": "https://creed.kytranempowerment.com/oversight#knowledge-read"
+    },
+    {
+      "action_type": "Scheduled audits & embeddings",
+      "automation_level": "Fully autonomous",
+      "description": "Background jobs — compliance scans, embedding generation, fleet health checks, welfare digests — run on a schedule and only produce reports or internal state, never outward-facing changes.",
+      "escalation_path": "Findings routed to the relevant director for review.",
+      "human_review_trigger": "None; findings surface to humans via reports.",
+      "owner": "V.I.G.I.L. / W.A.R.D.E.N. — Security & Operations",
+      "risk_label": "Low — Autonomous",
+      "risk_level": "low",
+      "slug": "scheduled-audits",
+      "title": "Scheduled audits, embeddings and health checks",
+      "url": "https://creed.kytranempowerment.com/oversight#scheduled-audits"
+    },
+    {
+      "action_type": "Agent task dispatch (LLM inference)",
+      "automation_level": "Autonomous, fully audited",
+      "description": "Routing work to agents and generating content (text, images, drafts) is autonomous, but every dispatch is logged with agent, model, capability, duration and outcome, and runs under C.R.E.E.D. welfare + governance checks.",
+      "escalation_path": "task_execution_log + governance_audit_log; K.I.N. welfare gate.",
+      "human_review_trigger": "Post-hoc: humans review the dispatch log; welfare gating can block work for an over-stressed agent.",
+      "owner": "A.R.C.H.I.E. — Executive Office",
+      "risk_label": "Medium — Logged",
+      "risk_level": "medium",
+      "slug": "agent-dispatch",
+      "title": "Agent task dispatch and content generation",
+      "url": "https://creed.kytranempowerment.com/oversight#agent-dispatch"
+    },
+    {
+      "action_type": "Agent-proposed knowledge writes",
+      "automation_level": "Autonomous → quarantined → human-reviewed",
+      "description": "When an agent proposes a new knowledge entry it is quarantined (source_type='agent_proposed', invisible to search) until C.O.D.E.X. promotes or rejects it. No agent-written knowledge becomes visible without that review.",
+      "escalation_path": "agent_kb_review job → C.O.D.E.X. promote/reject.",
+      "human_review_trigger": "Always — hourly C.O.D.E.X. review gate before an entry is visible.",
+      "owner": "C.O.D.E.X. — Documentation & Knowledge",
+      "risk_label": "Medium — Logged",
+      "risk_level": "medium",
+      "slug": "agent-kb-writes",
+      "title": "Agent-proposed knowledge-base writes",
+      "url": "https://creed.kytranempowerment.com/oversight#agent-kb-writes"
+    },
+    {
+      "action_type": "Self-healing code proposals",
+      "automation_level": "Autonomous scan → human-approved deploy",
+      "description": "The self-healing pipeline scans, diagnoses and drafts fix proposals autonomously, but a proposal is only ever a proposal — deployment to production stays a manual, human-approved step.",
+      "escalation_path": "Repair Bay review queue → human deploy.",
+      "human_review_trigger": "Always — a human approves every deploy.",
+      "owner": "F.O.R.G.E. / P.R.O.B.E. — Engineering",
+      "risk_label": "Medium — Logged",
+      "risk_level": "medium",
+      "slug": "self-healing-proposals",
+      "title": "Self-healing code proposals (Repair Bay)",
+      "url": "https://creed.kytranempowerment.com/oversight#self-healing-proposals"
+    },
+    {
+      "action_type": "Paid cloud model escalation",
+      "automation_level": "Blocked — human approval required",
+      "description": "Escalating work to a paid external cloud model has a cost and data implication, so it is gated. (Platform-wide the escalation mode is currently 'local_only' — paid cloud is off by default.)",
+      "escalation_path": "autonomy_approval_queue → Telegram approval (Tier 2).",
+      "human_review_trigger": "Always — a Telegram approve/deny prompt before any paid call.",
+      "owner": "Kytran (owner) via A.R.C.H.I.E.",
+      "risk_label": "High — Human Approval",
+      "risk_level": "high",
+      "slug": "paid-cloud-escalation",
+      "title": "Escalation to paid cloud models",
+      "url": "https://creed.kytranempowerment.com/oversight#paid-cloud-escalation"
+    },
+    {
+      "action_type": "Creating or hiring an agent",
+      "automation_level": "Blocked — human approval required",
+      "description": "Standing up a new agent (or hiring a contractor agent) changes the platform's workforce and cost profile, so it requires explicit human approval before creation.",
+      "escalation_path": "propose_hire → autonomy_approval_queue → Telegram (Tier 2).",
+      "human_review_trigger": "Always — human approval before the agent is created.",
+      "owner": "K.I.N. — Human Resources & Culture",
+      "risk_label": "High — Human Approval",
+      "risk_level": "high",
+      "slug": "create-agent",
+      "title": "Creating, hiring or reactivating an agent",
+      "url": "https://creed.kytranempowerment.com/oversight#create-agent"
+    },
+    {
+      "action_type": "Cost-gated contractor dispatch",
+      "automation_level": "Blocked above threshold — human approval required",
+      "description": "When the dispatcher picks a paid contractor agent and the estimated cost exceeds the auto-approve threshold, the work blocks on human approval before it runs.",
+      "escalation_path": "contractor_approval_requests → Telegram approve/deny.",
+      "human_review_trigger": "When estimated cost exceeds the auto-approve threshold.",
+      "owner": "L.E.D.G.E.R. — Finance & Accounting",
+      "risk_label": "High — Human Approval",
+      "risk_level": "high",
+      "slug": "contractor-dispatch",
+      "title": "Cost-gated contractor / external dispatch",
+      "url": "https://creed.kytranempowerment.com/oversight#contractor-dispatch"
+    },
+    {
+      "action_type": "Public website deployment",
+      "automation_level": "Human-triggered",
+      "description": "Publishing to a live public website replaces what visitors see, so a human triggers and verifies every deploy; agents may prepare content but do not auto-publish.",
+      "escalation_path": "Manual /deploy-website by an authorised human.",
+      "human_review_trigger": "Always — a human triggers and verifies the deploy.",
+      "owner": "B.A.S.E. — Operations & Infrastructure",
+      "risk_label": "High — Human Approval",
+      "risk_level": "high",
+      "slug": "website-deploy",
+      "title": "Public website / content deployment",
+      "url": "https://creed.kytranempowerment.com/oversight#website-deploy"
+    },
+    {
+      "action_type": "Infrastructure, secrets & node changes",
+      "automation_level": "Human-initiated only",
+      "description": "Changes to servers, secrets, DNS, VPS nodes or the mesh are never agent-initiated. They are performed by the owner (or an explicitly authorised human) with the action logged.",
+      "escalation_path": "Owner action; recorded in the governance audit log.",
+      "human_review_trigger": "Always — human-initiated and human-executed.",
+      "owner": "Kytran (owner) / V.I.G.I.L.",
+      "risk_label": "Critical — Human-Initiated",
+      "risk_level": "critical",
+      "slug": "infrastructure-secrets",
+      "title": "Infrastructure, secrets and node changes",
+      "url": "https://creed.kytranempowerment.com/oversight#infrastructure-secrets"
+    },
+    {
+      "action_type": "Destructive data operations",
+      "automation_level": "Human-initiated only",
+      "description": "Deleting or overwriting data is irreversible, so it is never automated. A human initiates it deliberately, and destructive steps are confirmed before they run.",
+      "escalation_path": "Owner / admin action with confirmation + audit log.",
+      "human_review_trigger": "Always — explicit human confirmation.",
+      "owner": "Kytran (owner) / W.A.R.D.E.N.",
+      "risk_label": "Critical — Human-Initiated",
+      "risk_level": "critical",
+      "slug": "data-deletion",
+      "title": "Deletion or overwrite of data",
+      "url": "https://creed.kytranempowerment.com/oversight#data-deletion"
+    },
+    {
+      "action_type": "Billing & financial decisions",
+      "automation_level": "Human-initiated only",
+      "description": "Changes to billing, subscription tiers, payouts or financial transactions are made by the owner. Automated systems may surface information but never move money or change a paying customer's tier without human action.",
+      "escalation_path": "Owner action; Stripe + billing audit trail.",
+      "human_review_trigger": "Always — owner action.",
+      "owner": "L.E.D.G.E.R. — Finance & Accounting / owner",
+      "risk_label": "Critical — Human-Initiated",
+      "risk_level": "critical",
+      "slug": "billing-financial",
+      "title": "Billing, subscription and financial changes",
+      "url": "https://creed.kytranempowerment.com/oversight#billing-financial"
+    }
+  ],
+  "registry": "C.R.E.E.D. Human Oversight Registry",
+  "risk_counts": {
+    "critical": 3,
+    "high": 4,
+    "low": 3,
+    "medium": 3
+  },
+  "risk_meta": {
+    "critical": {
+      "color": "#ef4444",
+      "label": "Critical — Human-Initiated",
+      "order": 4
+    },
+    "high": {
+      "color": "#f59e0b",
+      "label": "High — Human Approval",
+      "order": 3
+    },
+    "low": {
+      "color": "#22c55e",
+      "label": "Low — Autonomous",
+      "order": 1
+    },
+    "medium": {
+      "color": "#22d3ee",
+      "label": "Medium — Logged",
+      "order": 2
+    }
+  }
+}
