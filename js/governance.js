@@ -108,6 +108,31 @@ var Governance = {
         });
     },
 
+    // Paint the widget from a /api/v1/scores-shaped object. Used by BOTH the live
+    // feed and the same-origin fallback so they render identically.
+    render: function (data) {
+        var overallObj = (data.overall && typeof data.overall === 'object') ? data.overall : data;
+        var grade = data.grade || overallObj.grade || '—';
+        var rawScore = (typeof data.overall === 'number') ? data.overall
+            : (overallObj.score !== undefined ? overallObj.score
+                : (data.score !== undefined ? data.score : null));
+        var score = rawScore !== null ? Math.round(rawScore * 10) / 10 : null;
+        var events = data.event_count !== undefined ? data.event_count
+            : (overallObj.event_count !== undefined ? overallObj.event_count
+                : (data.events_today !== undefined ? data.events_today : null));
+
+        var gradeEl = document.getElementById('lgd-grade');
+        if (gradeEl) { gradeEl.textContent = grade; gradeEl.style.color = this.gradeColor(grade); }
+
+        var scoreEl = document.getElementById('lgd-score');
+        if (scoreEl) scoreEl.textContent = score !== null ? score + '%' : '—';
+
+        var eventsEl = document.getElementById('lgd-events');
+        if (eventsEl) eventsEl.textContent = events !== null ? Number(events).toLocaleString() : '—';
+
+        this.renderCategories(data.by_category || data.categories || data.breakdown || null);
+    },
+
     fetchData: function () {
         var self = this;
         fetch(this.API_URL, { mode: 'cors', cache: 'no-cache' })
@@ -116,33 +141,29 @@ var Governance = {
                 return r.json();
             })
             .then(function (data) {
-                // /api/v1/scores shape: { overall:<number>, grade, event_count, by_category:{...} }.
-                // Tolerate object-shaped overall and the public /score shape too.
-                var overallObj = (data.overall && typeof data.overall === 'object') ? data.overall : data;
-                var grade = data.grade || overallObj.grade || '—';
-                var rawScore = (typeof data.overall === 'number') ? data.overall
-                    : (overallObj.score !== undefined ? overallObj.score
-                        : (data.score !== undefined ? data.score : null));
-                var score = rawScore !== null ? Math.round(rawScore * 10) / 10 : null;
-                var events = data.event_count !== undefined ? data.event_count
-                    : (overallObj.event_count !== undefined ? overallObj.event_count
-                        : (data.events_today !== undefined ? data.events_today : null));
-
-                var gradeEl = document.getElementById('lgd-grade');
-                if (gradeEl) { gradeEl.textContent = grade; gradeEl.style.color = self.gradeColor(grade); }
-
-                var scoreEl = document.getElementById('lgd-score');
-                if (scoreEl) scoreEl.textContent = score !== null ? score + '%' : '—';
-
-                var eventsEl = document.getElementById('lgd-events');
-                if (eventsEl) eventsEl.textContent = events !== null ? Number(events).toLocaleString() : '—';
-
-                self.renderCategories(data.by_category || data.categories || data.breakdown || null);
+                self.render(data);
                 self.setStatus('Updated ' + new Date().toLocaleTimeString(), true);
             })
             .catch(function (err) {
-                self.setStatus('Unavailable — retrying in 60s', false);
-                console.warn('[LGD] fetch error:', err);
+                // Live feed blocked/unreachable (e.g. Chrome Private Network Access when the
+                // visitor's DNS resolves the API host to a private IP, or a real outage).
+                // Fall back to a SAME-ORIGIN published snapshot — no cross-origin, no PNA —
+                // so the widget is never blank.
+                console.warn('[LGD] live fetch failed, trying same-origin snapshot:', err);
+                fetch('/data/governance-fallback.json', { cache: 'no-cache' })
+                    .then(function (r) {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.json();
+                    })
+                    .then(function (data) {
+                        self.render(data);
+                        var when = data._snapshot_date ? ' (' + data._snapshot_date + ')' : '';
+                        self.setStatus('Published snapshot' + when + ' — live feed not reachable from this network', false);
+                    })
+                    .catch(function (e2) {
+                        self.setStatus('Unavailable — retrying in 60s', false);
+                        console.warn('[LGD] fallback also failed:', e2);
+                    });
             });
     },
 
