@@ -35,6 +35,10 @@ var Transitions = (function () {
                 after: function () {
                     Effects.init();
                     Nav.highlightActive();
+                    // Re-run page-specific live data after a barba swap (inline page
+                    // scripts don't execute on innerHTML swap). Governance.init no-ops
+                    // when the live-governance widget isn't on the current page.
+                    if (typeof Governance !== 'undefined' && Governance.init) Governance.init();
                     window.scrollTo(0, 0);
                 }
             }]
