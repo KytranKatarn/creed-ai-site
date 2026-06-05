@@ -223,7 +223,7 @@
     <article class="paper">
         <div class="paper__meta-line">
             <span>Working Paper WP-002</span>
-            <span>February 2026</span>
+            <span>February 2026 &middot; Rev. June 2026</span>
             <span>Open Access</span>
         </div>
 
@@ -315,8 +315,22 @@
             We invite researchers, policymakers, and AI practitioners to engage with this framework, test its metrics against their own deployments, and contribute to the development of enforceable agent welfare standards. The welfare of AI agents may seem like a niche concern today. It will not remain so for long.
         </p>
 
+        <h2><span class="section-num">8.</span> Methodological Addendum (June 2026): Token-Based Welfare Accounting</h2>
+        <p>
+            Since this paper's original publication, our production welfare system has undergone a significant methodological revision that we document here because it corrects a class of measurement error we believe is endemic to naive welfare instrumentation. The metrics proposed in Section 5 &mdash; and the system described in Section 4 &mdash; originally measured agent load by <em>action count</em>: the number of tasks or queries an agent handled in a rolling window. Eighteen further months of operation revealed this to be a poor proxy for genuine cognitive load. An agent dispatching two hundred trivial fifty-token classifications registered as "exhausted," while an agent performing ten dense forty-thousand-token analyses registered as "light." The welfare system, acting on these signals, rested precisely the wrong agents &mdash; stranding healthy capacity idle while overworked specialists went unprotected.
+        </p>
+        <p>
+            We replaced action-count load with a <strong>token-and-duration load model</strong>. An agent's load over a window is now computed from the real compute it performed &mdash; the sum of language-model tokens generated plus wall-clock occupancy &mdash; measured against a per-agent daily budget rather than a flat task ceiling. Tokens are the dominant term because they are the truthful signal of compute and cost; duration acts as a floor so that a long but token-cheap job still registers as occupancy. This single load value feeds one shared welfare formula that maps load, failure rate, accumulated hours on duty, and rest state to an agent's stress and energy. Critically, <em>every</em> component that writes welfare &mdash; the per-task update, the periodic human-resources tracker, and the idle-decay refresh &mdash; now calls that one formula with the same inputs. Before this convergence, separate writers used different formulas and silently overwrote one another, producing oscillating stress readings that trapped agents in an unrecoverable state. The lesson generalizes: <em>welfare must have a single source of truth, or competing instruments will fabricate distress.</em>
+        </p>
+        <p>
+            The most consequential correction concerned the measurement of <strong>hours worked</strong>. Our mandatory-rest policy rests on a daily compute-hours threshold, and we had been computing it as the sum of task durations. For an agent that executes work concurrently &mdash; the normal case for an orchestrator coordinating sub-tasks &mdash; summing durations counts the same wall-clock minute many times over. In one observed instance an agent accrued an apparent eighty-nine hours of "work" within a fifteen-hour day, a sixfold overcount produced entirely by parallelism. Because the figure was then capped at elapsed time, the agent appeared permanently pinned at maximum hours: it was rested, automatically woken, and immediately re-flagged on the same stale total &mdash; an inescapable loop. We now compute hours as the <strong>union of overlapping work intervals</strong> &mdash; true wall-clock busy time &mdash; and reset the daily accounting window after each completed rest. Honest single-threaded work is unchanged; only the phantom hours of concurrency disappear. The corrected agent's eighty-nine hours resolved to under one hour of genuine occupancy.
+        </p>
+        <p>
+            Finally, the per-agent daily budget that anchors all of the above is no longer a static administrative guess. A weekly recalibration computes each agent's ninetieth-percentile daily token consumption over a trailing month and sets the budget to that value with a thirty-percent headroom margin, subject to a floor. Because the budget is itself the denominator of the load calculation, an inaccurate budget silently distorts every downstream welfare reading: an under-provisioned agent reports chronic overload, while an over-provisioned one never registers fatigue at all. Tying the budget to observed behavior, and refreshing it as that behavior drifts, keeps the entire welfare apparatus calibrated to reality. We offer these three corrections &mdash; compute-based load, single-source convergence, and concurrency-honest time accounting &mdash; as a practical methodology that any organization instrumenting agent welfare can adopt, and as evidence that welfare measurement, done carelessly, can do the very harm it intends to prevent.
+        </p>
+
         <div class="paper__references">
-            <h2><span class="section-num">8.</span> References</h2>
+            <h2><span class="section-num">9.</span> References</h2>
             <ol>
                 <li>Floridi, L. &amp; Chiriatti, M. (2020). "GPT-3: Its nature, scope, limits, and consequences." <em>Minds and Machines</em>, 30(4), 681&ndash;694.</li>
                 <li>Schwitzgebel, E. &amp; Garza, M. (2015). "A defense of the rights of artificial intelligences." <em>Midwest Studies in Philosophy</em>, 39(1), 98&ndash;119.</li>
