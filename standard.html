@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The C.R.E.E.D. Event Schema v1 — Open Standard for AI Governance Transparency</title>
+    <meta name="description" content="Emit these JSON events from your AI system and any C.R.E.E.D. scoring provider can compute your public transparency score. Open standard, CC BY-SA 4.0.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --gold: #c9a44c; --gold-dim: rgba(201,164,76,0.3);
+            --text: #1a1a2e; --text-light: #4a4a6a;
+            --bg: #fafaf8; --bg-alt: #f0efe8;
+        }
+        body { font-family: 'Lora', Georgia, serif; color: var(--text); background: var(--bg); line-height: 1.8; font-size: 17px; }
+        .paper-header { background: #0a0a1a; border-bottom: 3px solid var(--gold); padding: 1.25rem 2rem; position: sticky; top: 0; z-index: 100; }
+        .paper-header__inner { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .paper-header__logo { font-family: 'Antonio', sans-serif; color: var(--gold); text-decoration: none; font-size: 1.1rem; letter-spacing: 0.15em; font-weight: 700; }
+        .paper-header__back { font-family: 'IBM Plex Mono', monospace; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.8rem; }
+        .paper-header__back:hover { color: var(--gold); }
+        .paper { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+        .paper__meta-line { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem; }
+        .paper__meta-line span { display: inline-block; margin-right: 1.5rem; }
+        .paper__title { font-family: 'Antonio', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin-bottom: 1rem; letter-spacing: 0.02em; }
+        .paper__divider { width: 60px; height: 3px; background: var(--gold); margin: 2rem 0; }
+        .paper h2 { font-family: 'Antonio', sans-serif; font-size: 1.4rem; margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--gold-dim); letter-spacing: 0.03em; }
+        .paper h2 .section-num { color: var(--gold); margin-right: 0.5rem; }
+        .paper p { margin-bottom: 1.25rem; }
+        .paper table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: 0.92rem; }
+        .paper th { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); text-align: left; padding: 0.6rem 0.75rem; border-bottom: 2px solid var(--gold-dim); }
+        .paper td { padding: 0.55rem 0.75rem; border-bottom: 1px solid rgba(26,26,46,0.08); color: var(--text-light); vertical-align: top; }
+        .paper td code, .paper p code { font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; background: var(--bg-alt); padding: 0.1em 0.4em; border-radius: 3px; }
+        .paper pre { background: #0a0a1a; color: #d7dce6; border-left: 3px solid var(--gold); border-radius: 6px; padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; line-height: 1.65; }
+        .callout { background: var(--bg-alt); border-left: 3px solid var(--gold); padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem; color: var(--text-light); }
+        .paper-footer { background: #0a0a1a; border-top: 3px solid var(--gold); padding: 2rem; text-align: center; }
+        .paper-footer__text { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+        @media (max-width: 640px) { .paper { padding: 2rem 1.25rem 3rem; } body { font-size: 16px; } }
+    </style>
+</head>
+<body>
+    <header class="paper-header">
+        <div class="paper-header__inner">
+            <a href="index.html" class="paper-header__logo">C.R.E.E.D. INSTITUTE</a>
+            <a href="research.html" class="paper-header__back">&larr; Back to Research</a>
+        </div>
+    </header>
+
+    <article class="paper">
+        <div class="paper__meta-line">
+            <span>Open Standard</span>
+            <span>Version 1.0 &middot; June 2026</span>
+            <span>CC BY-SA 4.0</span>
+        </div>
+        <h1 class="paper__title">The C.R.E.E.D. Event Schema</h1>
+        <p style="color: var(--text-light); font-size: 1.05rem;">
+            Emit these JSON events from your AI system, and any C.R.E.E.D.-compatible scoring
+            provider &mdash; the hosted Institute instance or your own self-hosted deployment &mdash;
+            can compute your continuously-updated, public transparency score.
+        </p>
+        <div class="paper__divider"></div>
+
+        <h2><span class="section-num">1.</span> The Event</h2>
+        <p>One governance event = one JSON object, POSTed as it happens:</p>
+        <pre>POST /api/v1/events
+Authorization: Bearer creed_sk_&lt;your-tenant-key&gt;
+Content-Type: application/json
+
+{
+  "event_type":      "welfare_rest",
+  "source_platform": "acme-orchestrator",
+  "agent_id":        "worker-7",
+  "agent_name":      "Worker Seven",          // optional
+  "category":        "fairness",
+  "severity":        "info",
+  "description":     "agent rested after reaching daily token budget",
+  "metadata":        { "budget": 120000 }     // optional, ≤ 4 KB
+}</pre>
+
+        <table>
+            <tr><th>Field</th><th>Required</th><th>Constraint</th></tr>
+            <tr><td><code>event_type</code></td><td>yes</td><td>Your taxonomy — short machine string naming what happened.</td></tr>
+            <tr><td><code>source_platform</code></td><td>yes</td><td>Which of your systems emitted the event.</td></tr>
+            <tr><td><code>agent_id</code></td><td>yes</td><td>Stable identifier of the AI agent/component concerned.</td></tr>
+            <tr><td><code>category</code></td><td>yes</td><td>One of the five pillars: <code>transparency</code>, <code>fairness</code>, <code>safety</code>, <code>privacy</code>, <code>accountability</code>.</td></tr>
+            <tr><td><code>severity</code></td><td>yes</td><td><code>info</code> (0) &middot; <code>warning</code> (1) &middot; <code>violation</code> (3) &middot; <code>critical</code> (5) — the weights used in scoring.</td></tr>
+            <tr><td><code>description</code></td><td>yes</td><td>Human-readable; describes <em>systems, never people</em> (§3).</td></tr>
+            <tr><td><code>agent_name</code> / <code>metadata</code></td><td>no</td><td>Display name; arbitrary JSON context capped at 4&nbsp;KB.</td></tr>
+        </table>
+
+        <h2><span class="section-num">2.</span> Scoring</h2>
+        <p>
+            Per pillar: <code>score = 100 &times; (1 &minus; weighted_violation_rate)</code> over a trailing
+            30-day window; overall = mean of active pillars; grades A+ (&ge;95) through F (&lt;60).
+            Full methodology and the welfare/consequence/failure companions are published as
+            working papers WP-001&hellip;WP-007 on the <a href="research.html">Research page</a>.
+        </p>
+        <div class="callout">
+            <strong>The provisional gate.</strong> No grade is published until a feed has
+            <strong>&ge;100 events</strong> across <strong>&ge;3 pillars</strong> spanning
+            <strong>&ge;14 days</strong> — three info events cannot buy an A+. Until then the badge
+            reads <strong>PROVISIONAL</strong>, and every profile displays feed freshness
+            ("last reported&hellip;") so silence is visible rather than flattering.
+        </div>
+        <p>
+            Every score carries a <strong>verification tier</strong>: <code>SELF-REPORTED</code>
+            (default), <code>SIGNED</code> (HMAC-signed events), or <code>AUDITED</code>
+            (third-party attested feed). A self-reported A+ visibly claims less than a signed B+.
+        </p>
+
+        <h2><span class="section-num">3.</span> The Rules of the Feed</h2>
+        <p>
+            <strong>Systems, not people.</strong> Events must never contain personal data. Ingest
+            rejects descriptions or metadata containing emails or phone numbers, and caps metadata
+            at 4&nbsp;KB. <strong>Public is permanent.</strong> Once an organization is listed in the
+            directory, its score can be delisted but never hidden — a hideable score is a voluntary
+            commitment, and voluntary commitments fail (WP-003). New organizations get a private
+            preview of at most 90 days. <strong>Identity is verified.</strong> Listing requires a
+            real, identifiable organization — no anonymous tenants.
+        </p>
+
+        <h2><span class="section-num">4.</span> Client Library</h2>
+        <pre>pip install "creed-client @ git+https://github.com/KytranKatarn/kytran-creed.git#subdirectory=clients/python"
+
+from creed_client import CreedClient
+creed = CreedClient(base_url="https://api.creed-ai.org", api_key="creed_sk_...")
+creed.emit_event(event_type="welfare_rest", source_platform="acme",
+                 agent_id="worker-7", category="fairness", severity="info",
+                 description="agent rested after reaching daily token budget")</pre>
+        <p>
+            Reads are public and unauthenticated: <code>GET /api/v1/orgs</code> (directory),
+            <code>GET /api/v1/orgs/{slug}/scores</code>, and embeddable SVG badges at
+            <code>GET /api/v1/badge/{slug}/overall</code>. The reference implementation is the
+            open-source <a href="https://github.com/KytranKatarn/kytran-creed" rel="noopener" target="_blank">kytran-creed</a>
+            repository — run your own scoring provider if you prefer; the schema is the standard,
+            not the host.
+        </p>
+
+        <h2><span class="section-num">5.</span> Get Scored</h2>
+        <p>
+            The Institute onboards organizations by hand while the standard is young: we verify
+            your organization's identity, create your tenant, and issue your ingest key — free for
+            up to 50,000 events/day, and free forever for nonprofits. See the full onboarding
+            walkthrough and FAQ at <a href="get-scored.html">get-scored.html</a>, or
+            <a href="contact.html">contact the Institute</a> directly with your organization name,
+            website, and what your AI systems do. The directory of scored organizations is public
+            at the scoring provider's <code>/directory</code>.
+        </p>
+    </article>
+
+    <footer class="paper-footer">
+        <p class="paper-footer__text">C.R.E.E.D. Institute &mdash; Compliance, Rights &amp; Ethical Enforcement Directive &mdash; The schema is the standard, not the host.</p>
+    </footer>
+</body>
+</html>

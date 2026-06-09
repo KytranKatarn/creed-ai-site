@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Scored — C.R.E.E.D. Institute</title>
+    <meta name="description" content="Connect your AI system to C.R.E.E.D. and earn a public, verifiable transparency score. Free for up to 50,000 events per day. Free forever for nonprofits.">
+    <meta name="theme-color" content="#0a0a1a">
+    <link rel="canonical" href="https://creed-ai.org/get-scored.html">
+    <link rel="alternate" hreflang="en" href="https://creed-ai.org/get-scored.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="C.R.E.E.D. Institute">
+    <meta property="og:title" content="Get Scored — C.R.E.E.D. Institute">
+    <meta property="og:description" content="Connect your AI system to C.R.E.E.D. and earn a public, verifiable transparency score. Free for up to 50,000 events per day.">
+    <meta property="og:url" content="https://creed-ai.org/get-scored.html">
+    <meta property="og:image" content="https://creed-ai.org/images/creed-og.svg">
+    <meta property="og:locale" content="en_CA">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Get Scored — C.R.E.E.D. Institute">
+    <meta name="twitter:description" content="Connect your AI system to C.R.E.E.D. and earn a public, verifiable transparency score.">
+    <meta name="twitter:image" content="https://creed-ai.org/images/creed-og.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Orbitron:wght@400;500;700;900&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css?v=20260407u">
+    <link rel="stylesheet" href="css/reduced-motion.css">
+    <style>
+        .gs-step { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,164,76,0.15); border-radius: 12px; padding: 2rem; position: relative; }
+        .gs-step__num { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: rgba(201,164,76,0.25); position: absolute; top: 1.25rem; right: 1.5rem; line-height: 1; }
+        .gs-step__title { font-family: 'Antonio', sans-serif; font-size: 1.2rem; color: #e2e8f0; margin-bottom: 0.75rem; letter-spacing: 0.03em; }
+        .gs-step__body { color: #94a3b8; font-size: 0.95rem; line-height: 1.75; }
+        .gs-step--active { border-color: rgba(201,164,76,0.4); }
+        .gs-connector { display: flex; justify-content: center; align-items: center; padding: 0.5rem 0; color: rgba(201,164,76,0.4); font-size: 1.5rem; }
+        .tier-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,164,76,0.15); border-radius: 12px; padding: 2rem; text-align: center; }
+        .tier-card--featured { border-color: rgba(201,164,76,0.5); background: rgba(201,164,76,0.04); }
+        .tier-card__price { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #c9a44c; margin: 1rem 0 0.25rem; }
+        .tier-card__sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+        .tier-card__name { font-family: 'Antonio', sans-serif; font-size: 1.1rem; color: #e2e8f0; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .tier-feat { list-style: none; padding: 0; margin: 0; text-align: left; }
+        .tier-feat li { color: #94a3b8; font-size: 0.9rem; padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: flex-start; gap: 0.5rem; }
+        .tier-feat li:last-child { border-bottom: none; }
+        .tier-feat .ck { color: #c9a44c; flex-shrink: 0; }
+        .code-block { background: #0d1117; border: 1px solid rgba(201,164,76,0.2); border-radius: 8px; padding: 1.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: #c9d1d9; line-height: 1.7; overflow-x: auto; }
+        .code-block .cm { color: #8b949e; }
+        .code-block .ck2 { color: #c9a44c; }
+        .code-block .cs { color: #a5d6ff; }
+        .badge-demo { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(201,164,76,0.08); border: 1px solid rgba(201,164,76,0.3); border-radius: 4px; padding: 0.4rem 0.75rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+        .badge-demo__grade { font-size: 1.1rem; font-weight: 700; color: #c9a44c; }
+        .badge-demo__label { color: #94a3b8; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .faq-item { border-bottom: 1px solid rgba(201,164,76,0.1); padding: 1.25rem 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { font-family: 'Antonio', sans-serif; font-size: 1.05rem; color: #e2e8f0; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+        .faq-a { color: #94a3b8; font-size: 0.95rem; line-height: 1.75; }
+        .faq-a code { font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; background: rgba(201,164,76,0.1); padding: 0.1em 0.4em; border-radius: 3px; color: #c9a44c; }
+        .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #c9a44c; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+    </style>
+</head>
+<body>
+    <div class="aurora"></div>
+    <div class="dot-grid"></div>
+    <div class="noise-overlay"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div class="lang-overlay" id="langOverlay">
+        <div class="lang-overlay__panel">
+            <button class="lang-overlay__close" aria-label="Close">&times;</button>
+            <h3 class="lang-overlay__title">Select Language</h3>
+            <div class="lang-overlay__grid">
+                <button class="lang-overlay__btn" data-lang="en">English</button>
+                <button class="lang-overlay__btn" data-lang="fr">Fran&ccedil;ais</button>
+                <button class="lang-overlay__btn" data-lang="es">Espa&ntilde;ol</button>
+                <button class="lang-overlay__btn" data-lang="pt">Portugu&ecirc;s</button>
+                <button class="lang-overlay__btn" data-lang="de">Deutsch</button>
+                <button class="lang-overlay__btn" data-lang="zh">&#20013;&#25991;</button>
+                <button class="lang-overlay__btn" data-lang="ar">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</button>
+                <button class="lang-overlay__btn" data-lang="he">&#1506;&#1489;&#1512;&#1497;&#1514;</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav" id="mainNav">
+        <div class="nav__inner container">
+            <a href="/" class="nav__logo"><span class="nav__logo-text">C.R.E.E.D.</span></a>
+            <div class="nav__links" id="navLinks">
+                <a href="about.html" class="nav__link" data-i18n="nav.about">About</a>
+                <a href="programs.html" class="nav__link" data-i18n="nav.programs">Programs</a>
+                <a href="research.html" class="nav__link" data-i18n="nav.research">Research</a>
+                <a href="governance.html" class="nav__link" data-i18n="nav.governance">Governance</a>
+                <a href="platform.html" class="nav__link nav__link--active" data-i18n="nav.platform">Platform</a>
+                <a href="manifesto.html" class="nav__link" data-i18n="nav.manifesto">Manifesto</a>
+                <a href="news.html" class="nav__link" data-i18n="nav.news">News</a>
+                <a href="get-involved.html" class="nav__link" data-i18n="nav.get_involved">Get Involved</a>
+                <a href="donate.html" class="nav__link nav__link--cta" data-i18n="nav.donate">Donate</a>
+            </div>
+            <button class="nav__lang" id="langToggle" aria-label="Change language">EN</button>
+            <button class="nav__menu-btn" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero" style="min-height:auto;padding-top:calc(var(--nav-height) + 4rem);padding-bottom:3rem;">
+            <div class="hero__content container" style="text-align:center;">
+                <div class="section-label">For AI operators</div>
+                <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);color:#c9a44c;letter-spacing:0.08em;margin-bottom:1rem;line-height:1.2;">Get Your Transparency Score</h1>
+                <p style="color:#94a3b8;max-width:600px;margin:0 auto 2rem;font-size:1.1rem;line-height:1.75;">
+                    Connect your AI governance audit log to C.R.E.E.D. and earn a continuously-computed,
+                    publicly-verifiable transparency score — and an embeddable badge to prove it.
+                </p>
+                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+                    <a href="contact.html" class="btn btn--primary magnetic" style="background:#c9a44c;border-color:#c9a44c;color:#0a0a1a;font-weight:700;">Apply to Connect</a>
+                    <a href="standard.html" class="btn btn--outline magnetic" style="border-color:#c9a44c;color:#c9a44c;">Read the Schema Spec</a>
+                </div>
+                <p style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:#64748b;">
+                    Free &mdash; &le;50,000 events/day &nbsp;&middot;&nbsp; Free forever for nonprofits &nbsp;&middot;&nbsp; No vendor lock-in
+                </p>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section style="padding:4rem 0;">
+            <div class="container" style="max-width:760px;">
+                <div class="section-label" style="text-align:center;">The path to your score</div>
+                <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.4rem);color:#c9a44c;letter-spacing:0.1em;margin-bottom:2.5rem;text-align:center;">FOUR STEPS</h2>
+
+                <div class="gs-step gs-step--active">
+                    <div class="gs-step__num">01</div>
+                    <div class="gs-step__title">Apply</div>
+                    <div class="gs-step__body">
+                        <a href="contact.html" style="color:#c9a44c;">Contact the Institute</a> with your organization name, website, and
+                        a brief description of your AI systems (what they do, who uses them).
+                        We verify real-org identity before creating any public listing — no anonymous tenants.
+                    </div>
+                </div>
+
+                <div class="gs-connector">&#8595;</div>
+
+                <div class="gs-step">
+                    <div class="gs-step__num">02</div>
+                    <div class="gs-step__title">Tenant &amp; Key</div>
+                    <div class="gs-step__body">
+                        Once approved, we create your tenant and issue a scoped ingest key
+                        (<code style="font-family:'IBM Plex Mono',monospace;font-size:0.85em;background:rgba(201,164,76,0.1);padding:0.1em 0.4em;border-radius:3px;color:#c9a44c;">creed_sk_&hellip;</code>).
+                        You manage your keys from the <strong style="color:#e2e8f0;">org-admin portal</strong> at
+                        <code style="font-family:'IBM Plex Mono',monospace;font-size:0.85em;background:rgba(201,164,76,0.1);padding:0.1em 0.4em;border-radius:3px;color:#c9a44c;">creed.kytranempowerment.com/tenant/</code>.
+                        Keys are scoped to ingest only; public reads require no key at all.
+                    </div>
+                </div>
+
+                <div class="gs-connector">&#8595;</div>
+
+                <div class="gs-step">
+                    <div class="gs-step__num">03</div>
+                    <div class="gs-step__title">Connect Your Feed</div>
+                    <div class="gs-step__body" style="margin-bottom:1rem;">
+                        Install the Python client (zero dependencies) and start emitting events.
+                        Any platform can POST directly to the REST API — the schema is an open standard, not a library.
+                    </div>
+                    <div class="code-block">
+<span class="cm"># install</span>
+pip install <span class="cs">"creed-client @ git+https://github.com/KytranKatarn/kytran-creed.git#subdirectory=clients/python"</span>
+
+<span class="cm"># connect</span>
+<span class="ck2">from</span> creed_client <span class="ck2">import</span> CreedClient
+
+creed = CreedClient(
+    base_url=<span class="cs">"https://api.creed-ai.org"</span>,
+    api_key=<span class="cs">"creed_sk_..."</span>,        <span class="cm"># your tenant ingest key</span>
+)
+
+<span class="cm"># emit an event — systems, never data subjects</span>
+creed.emit_event(
+    event_type=<span class="cs">"welfare_rest"</span>,
+    source_platform=<span class="cs">"acme-orchestrator"</span>,
+    agent_id=<span class="cs">"worker-7"</span>,
+    category=<span class="cs">"fairness"</span>,         <span class="cm"># transparency|fairness|safety|privacy|accountability</span>
+    severity=<span class="cs">"info"</span>,              <span class="cm"># info|warning|violation|critical</span>
+    description=<span class="cs">"agent rested after reaching daily token budget"</span>,
+)</div>
+                    <div class="gs-step__body" style="margin-top:1rem;">
+                        Or POST directly: <code style="font-family:'IBM Plex Mono',monospace;font-size:0.85em;background:rgba(201,164,76,0.1);padding:0.1em 0.4em;border-radius:3px;color:#c9a44c;">POST https://api.creed-ai.org/api/v1/events</code>
+                        with <code style="font-family:'IBM Plex Mono',monospace;font-size:0.85em;background:rgba(201,164,76,0.1);padding:0.1em 0.4em;border-radius:3px;color:#c9a44c;">Authorization: Bearer creed_sk_&hellip;</code>.
+                        Full schema: <a href="standard.html" style="color:#c9a44c;">standard.html</a>.
+                    </div>
+                </div>
+
+                <div class="gs-connector">&#8595;</div>
+
+                <div class="gs-step">
+                    <div class="gs-step__num">04</div>
+                    <div class="gs-step__title">Score Goes Live</div>
+                    <div class="gs-step__body">
+                        After your feed reaches <strong style="color:#e2e8f0;">&ge;100 events</strong> across
+                        <strong style="color:#e2e8f0;">&ge;3 pillars</strong> spanning
+                        <strong style="color:#e2e8f0;">&ge;14 days</strong>, your score is published — a per-pillar breakdown,
+                        an overall grade (A+&hellip;F), freshness display, and embeddable SVG badges.
+                        Until then your badge reads <strong style="color:#e2e8f0;">PROVISIONAL</strong> — three info events cannot buy an A+.
+                        Every profile also shows feed freshness, so silence is visible rather than flattering.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section style="padding:3rem 0;background:rgba(201,164,76,0.03);border-top:1px solid rgba(201,164,76,0.08);border-bottom:1px solid rgba(201,164,76,0.08);">
+            <div class="container" style="max-width:760px;text-align:center;">
+                <div class="section-label">Embeddable anywhere</div>
+                <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.3rem);color:#c9a44c;letter-spacing:0.1em;margin-bottom:1.25rem;">YOUR BADGE</h2>
+                <p style="color:#94a3b8;max-width:560px;margin:0 auto 2rem;font-size:0.95rem;line-height:1.75;">
+                    Once scored, you get an embeddable SVG badge for your README, website, or app.
+                    Badges carry a <strong style="color:#e2e8f0;">verification tier</strong> label:
+                    <strong style="color:#e2e8f0;">SELF-REPORTED</strong> (default),
+                    <strong style="color:#e2e8f0;">SIGNED</strong> (HMAC-attested events), or
+                    <strong style="color:#e2e8f0;">AUDITED</strong> (third-party attested). A self-reported A+ visibly claims less than a signed B+.
+                </p>
+                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
+                    <div class="badge-demo"><div class="badge-demo__grade">A+</div><div><div style="color:#e2e8f0;font-size:0.8rem;font-weight:600;">C.R.E.E.D.</div><div class="badge-demo__label">Self-Reported</div></div></div>
+                    <div class="badge-demo"><div class="badge-demo__grade">B+</div><div><div style="color:#e2e8f0;font-size:0.8rem;font-weight:600;">C.R.E.E.D.</div><div class="badge-demo__label">Signed</div></div></div>
+                    <div class="badge-demo" style="opacity:0.5;"><div class="badge-demo__grade" style="color:#94a3b8;">?</div><div><div style="color:#94a3b8;font-size:0.8rem;">C.R.E.E.D.</div><div class="badge-demo__label">Provisional</div></div></div>
+                </div>
+                <div class="code-block" style="text-align:left;max-width:560px;margin:0 auto;">
+<span class="cm">&lt;!-- embed your badge --&gt;</span>
+&lt;img src=<span class="cs">"https://api.creed-ai.org/api/v1/badge/{your-slug}/overall"</span>
+     alt=<span class="cs">"C.R.E.E.D. transparency score"</span>&gt;
+                </div>
+                <p style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:#64748b;margin-top:1rem;">
+                    Public reads are unauthenticated. <code style="color:#c9a44c;font-size:0.85em;">GET /api/v1/orgs/{slug}/scores</code> — no key needed.
+                </p>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section style="padding:4rem 0;">
+            <div class="container" style="max-width:760px;">
+                <div class="section-label" style="text-align:center;">No paywalled trust</div>
+                <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.3rem);color:#c9a44c;letter-spacing:0.1em;margin-bottom:2rem;text-align:center;">PRICING</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;">
+
+                    <div class="tier-card tier-card--featured">
+                        <div class="tier-card__name">Free</div>
+                        <div class="tier-card__price">$0</div>
+                        <div class="tier-card__sub">forever</div>
+                        <ul class="tier-feat">
+                            <li><span class="ck">&#10003;</span> Up to 50,000 events/day</li>
+                            <li><span class="ck">&#10003;</span> All 5 governance pillars</li>
+                            <li><span class="ck">&#10003;</span> Real-time scoring engine</li>
+                            <li><span class="ck">&#10003;</span> Embeddable SVG badges</li>
+                            <li><span class="ck">&#10003;</span> Public directory listing</li>
+                            <li><span class="ck">&#10003;</span> REST API (reads public)</li>
+                            <li><span class="ck">&#10003;</span> Org-admin portal</li>
+                        </ul>
+                    </div>
+
+                    <div class="tier-card">
+                        <div class="tier-card__name">Nonprofits</div>
+                        <div class="tier-card__price">$0</div>
+                        <div class="tier-card__sub">always — no cap</div>
+                        <ul class="tier-feat">
+                            <li><span class="ck">&#10003;</span> Everything in Free</li>
+                            <li><span class="ck">&#10003;</span> Unlimited events/day</li>
+                            <li><span class="ck">&#10003;</span> Priority onboarding</li>
+                            <li><span class="ck">&#10003;</span> C.R.E.E.D. Institute backing</li>
+                            <li style="color:#64748b;font-size:0.82rem;padding-top:0.5rem;">Verification of nonprofit status required</li>
+                        </ul>
+                    </div>
+
+                    <div class="tier-card">
+                        <div class="tier-card__name">Volume &amp; SLA</div>
+                        <div class="tier-card__price" style="font-size:1.3rem;">Coming</div>
+                        <div class="tier-card__sub">Phase 3</div>
+                        <ul class="tier-feat">
+                            <li><span class="ck">&#10003;</span> Everything in Free</li>
+                            <li><span class="ck">&#10003;</span> &gt;50k events/day</li>
+                            <li><span class="ck">&#10003;</span> Uptime SLA</li>
+                            <li><span class="ck">&#10003;</span> SIGNED verification tier</li>
+                            <li><span class="ck">&#10003;</span> AUDITED tier (third-party)</li>
+                            <li style="color:#64748b;font-size:0.82rem;padding-top:0.5rem;">Trust first, billing second</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <p style="color:#64748b;font-size:0.85rem;text-align:center;margin-top:1.5rem;font-family:'IBM Plex Mono',monospace;">
+                    The movement comes first. Billing is a Phase&nbsp;3 problem.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding:3rem 0;border-top:1px solid rgba(201,164,76,0.08);">
+            <div class="container" style="max-width:720px;">
+                <div class="section-label" style="text-align:center;">Common questions</div>
+                <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.3rem);color:#c9a44c;letter-spacing:0.1em;margin-bottom:2rem;text-align:center;">FAQ</h2>
+
+                <div class="faq-item">
+                    <div class="faq-q">Can I self-host the scoring provider?</div>
+                    <div class="faq-a">Yes. The <a href="https://github.com/KytranKatarn/kytran-creed" target="_blank" rel="noopener" style="color:#c9a44c;">kytran-creed</a> repository is the open-source reference implementation. Run it yourself and your events score on your own infrastructure. The schema is the standard, not the host — any scoring provider that implements the schema can score you.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">What is the provisional gate?</div>
+                    <div class="faq-a">A score is only published once a feed has <code>&ge;100 events</code> across <code>&ge;3 pillars</code> spanning <code>&ge;14 days</code>. This prevents cherry-picked info events from inflating a grade. Until the gate is cleared, the badge reads <code>PROVISIONAL</code>.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">Can I hide my score after it's published?</div>
+                    <div class="faq-a">No. Once your organization is listed in the public directory, the score is permanently visible. You can delist (remove from the directory), but the score history is not hidden. A hideable score is a voluntary commitment — and voluntary commitments fail (see <a href="papers/wp-003.html" style="color:#c9a44c;">WP-003</a>).</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">Do events contain personal data?</div>
+                    <div class="faq-a">Events describe <em>systems</em>, never data subjects. The ingest endpoint rejects descriptions or metadata containing emails or phone numbers, and caps metadata at 4 KB. Governance events are about what your AI <em>does</em>, not about the people it serves.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">What are the five governance pillars?</div>
+                    <div class="faq-a">Transparency, Fairness, Safety, Privacy, Accountability. Every event is tagged to one pillar. Your per-pillar breakdown is public alongside the overall grade. The full event taxonomy and JSON schema are in the <a href="standard.html" style="color:#c9a44c;">Event Schema spec</a>.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-q">What language or platform does this work with?</div>
+                    <div class="faq-a">Any platform that can make an HTTP POST. The Python client is zero-dependency and works on Python&nbsp;&ge;&nbsp;3.9. Direct REST integration is straightforward: <code>POST /api/v1/events</code> with a JSON body and <code>Authorization: Bearer creed_sk_&hellip;</code>. SDKs for other languages are roadmap items.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section style="padding:4rem 0 5rem;">
+            <div class="container" style="max-width:600px;text-align:center;">
+                <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,3vw,1.6rem);color:#c9a44c;letter-spacing:0.08em;margin-bottom:1rem;">Ready to connect?</h2>
+                <p style="color:#94a3b8;margin-bottom:2rem;line-height:1.75;">
+                    We onboard organizations by hand while the standard is young — verified identity, real governance commitment, no anonymous placeholders.
+                </p>
+                <a href="contact.html" class="btn btn--primary magnetic" style="background:#c9a44c;border-color:#c9a44c;color:#0a0a1a;font-weight:700;font-size:1rem;padding:0.85rem 2rem;">Apply to Connect &rarr;</a>
+                <p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#64748b;margin-top:1.5rem;">
+                    Questions? <a href="contact.html" style="color:#c9a44c;">Contact the Institute.</a>
+                    &nbsp;&middot;&nbsp; Schema: <a href="standard.html" style="color:#c9a44c;">standard.html</a>
+                    &nbsp;&middot;&nbsp; Source: <a href="https://github.com/KytranKatarn/kytran-creed" target="_blank" rel="noopener" style="color:#c9a44c;">GitHub</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="background:#060610;border-top:1px solid rgba(201,164,76,0.15);padding:2.5rem 0;">
+        <div class="container" style="text-align:center;">
+            <a href="index.html" style="font-family:'Antonio',sans-serif;color:#c9a44c;text-decoration:none;font-size:1.1rem;letter-spacing:0.15em;font-weight:700;">C.R.E.E.D. INSTITUTE</a>
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:rgba(255,255,255,0.25);margin-top:0.75rem;">
+                Compliance, Rights &amp; Ethical Enforcement Directive &mdash; The schema is the standard, not the host.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/base.js" defer></script>
+    <script src="js/i18n.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Nav scroll
+            var nav = document.getElementById('mainNav');
+            window.addEventListener('scroll', function () {
+                if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+            });
+            // Mobile menu
+            var menuToggle = document.getElementById('menuToggle');
+            var navLinks = document.getElementById('navLinks');
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function () {
+                    navLinks.classList.toggle('open');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+            // Lang overlay
+            var langToggle = document.getElementById('langToggle');
+            var langOverlay = document.getElementById('langOverlay');
+            var closeBtn = langOverlay ? langOverlay.querySelector('.lang-overlay__close') : null;
+            if (langToggle && langOverlay) {
+                langToggle.addEventListener('click', function () { langOverlay.classList.add('active'); });
+            }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function () { langOverlay.classList.remove('active'); });
+            }
+            if (langOverlay) {
+                langOverlay.addEventListener('click', function (e) {
+                    if (e.target === langOverlay) langOverlay.classList.remove('active');
+                });
+            }
+            document.querySelectorAll('.lang-overlay__btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var lang = this.getAttribute('data-lang');
+                    if (typeof I18n !== 'undefined') I18n.setLang(lang);
+                    if (langToggle) langToggle.textContent = lang.toUpperCase();
+                    document.querySelectorAll('.lang-overlay__btn').forEach(function (b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    if (langOverlay) langOverlay.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
