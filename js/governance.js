@@ -23,9 +23,10 @@ var Governance = {
         fairness: 'Fairness',
         privacy: 'Privacy',
         safety: 'Safety',
-        transparency: 'Transparency'
+        transparency: 'Transparency',
+        environmental: 'Environmental'
     },
-    CATEGORY_ORDER: ['accountability', 'fairness', 'privacy', 'safety', 'transparency'],
+    CATEGORY_ORDER: ['accountability', 'fairness', 'privacy', 'safety', 'transparency', 'environmental'],
 
     gradeColor: function (grade) {
         if (!grade) return '#94a3b8';

@@ -1,14 +1,1 @@
-{
-  "_comment": "Same-origin fallback for the governance widget when the live C.R.E.E.D. API is unreachable from the visitor's network (e.g. Chrome PNA blocking a private-IP resolve on a LAN). Matches the /api/v1/scores shape. Published snapshot — refresh periodically.",
-  "_snapshot_date": "2026-06-05",
-  "overall": 99.5,
-  "grade": "A+",
-  "event_count": 293358,
-  "by_category": {
-    "accountability": { "score": 98.6, "grade": "A+", "events": 4107 },
-    "fairness": { "score": 100.0, "grade": "A+", "events": 279456 },
-    "privacy": { "score": 99.8, "grade": "A+", "events": 5184 },
-    "safety": { "score": 100.0, "grade": "A+", "events": 925 },
-    "transparency": { "score": 99.2, "grade": "A+", "events": 3686 }
-  }
-}
+{"by_category":{"accountability":{"events":4383,"grade":"A+","score":98.6},"environmental":{"events":2,"grade":"F","note":"insufficient data (2 events; minimum 100 to count toward overall)","provisional":true,"score":40.0},"fairness":{"events":281000,"grade":"A+","score":100.0},"privacy":{"events":7942,"grade":"A+","score":99.8},"safety":{"events":833,"grade":"A+","score":100.0},"transparency":{"events":4139,"grade":"A+","score":99.6}},"event_count":298299,"grade":"A+","overall":99.6,"overall_categories":["transparency","fairness","safety","privacy","accountability"],"overall_provisional":false,"pillar_min_events":100}
