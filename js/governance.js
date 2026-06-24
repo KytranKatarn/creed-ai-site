@@ -61,7 +61,11 @@ var Governance = {
         var score = cat && cat.score !== undefined ? Math.round(cat.score) : (typeof cat === 'number' ? Math.round(cat) : null);
         var grade = cat && cat.grade ? cat.grade : null;
         var label = this.CATEGORY_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
-        var color = grade ? this.gradeColor(grade) : (score !== null ? this.scoreToGradeColor(score) : '#94a3b8');
+        // A provisional pillar hasn't logged enough events to count toward the
+        // overall grade — render it muted with an honest note instead of a
+        // confident colour, so thin data never reads as a real grade.
+        var provisional = !!(cat && cat.provisional);
+        var color = provisional ? '#94a3b8' : (grade ? this.gradeColor(grade) : (score !== null ? this.scoreToGradeColor(score) : '#94a3b8'));
         var displayVal = grade || (score !== null ? (score + '%') : '—');
 
         var card = document.createElement('div');
@@ -78,11 +82,18 @@ var Governance = {
         card.appendChild(labelEl);
         card.appendChild(valEl);
 
-        if (grade && score !== null) {
+        if (grade && score !== null && !provisional) {
             var subEl = document.createElement('div');
             this.applyStyles(subEl, { fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.3rem' });
             subEl.textContent = score + '%';
             card.appendChild(subEl);
+        }
+
+        if (provisional) {
+            var noteEl = document.createElement('div');
+            this.applyStyles(noteEl, { fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.65rem', color: '#eab308', marginTop: '0.4rem', lineHeight: '1.3' });
+            noteEl.textContent = (cat && cat.note) ? cat.note : 'provisional — insufficient data';
+            card.appendChild(noteEl);
         }
 
         return card;
@@ -122,8 +133,24 @@ var Governance = {
             : (overallObj.event_count !== undefined ? overallObj.event_count
                 : (data.events_today !== undefined ? data.events_today : null));
 
+        var overallProvisional = (data.overall_provisional === true) || (overallObj && overallObj.overall_provisional === true);
         var gradeEl = document.getElementById('lgd-grade');
-        if (gradeEl) { gradeEl.textContent = grade; gradeEl.style.color = this.gradeColor(grade); }
+        if (gradeEl) {
+            gradeEl.textContent = grade;
+            gradeEl.style.color = overallProvisional ? '#94a3b8' : this.gradeColor(grade);
+            var provNote = document.getElementById('lgd-grade-prov');
+            if (overallProvisional) {
+                if (!provNote && gradeEl.parentNode) {
+                    provNote = document.createElement('div');
+                    provNote.id = 'lgd-grade-prov';
+                    this.applyStyles(provNote, { fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.6rem', color: '#eab308', marginTop: '0.3rem', textTransform: 'uppercase', letterSpacing: '0.08em' });
+                    provNote.textContent = 'provisional';
+                    gradeEl.parentNode.appendChild(provNote);
+                }
+            } else if (provNote) {
+                provNote.parentNode.removeChild(provNote);
+            }
+        }
 
         var scoreEl = document.getElementById('lgd-score');
         if (scoreEl) scoreEl.textContent = score !== null ? score + '%' : '—';

@@ -39,6 +39,7 @@ var Transitions = (function () {
                     // scripts don't execute on innerHTML swap). Governance.init no-ops
                     // when the live-governance widget isn't on the current page.
                     if (typeof Governance !== 'undefined' && Governance.init) Governance.init();
+                    if (typeof Directory !== 'undefined' && Directory.init) Directory.init();
                     window.scrollTo(0, 0);
                 }
             }]
