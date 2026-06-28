@@ -1,14 +1,14 @@
 {
   "_comment": "Same-origin fallback for the governance widget when the live C.R.E.E.D. API is unreachable (Chrome PNA on a LAN, or an outage). Matches /api/v1/scores. Auto-refreshed weekly by scripts/refresh_creed_fallback.py.",
-  "_snapshot_date": "2026-06-23",
-  "overall": 99.5,
+  "_snapshot_date": "2026-06-28",
+  "overall": 99.6,
   "grade": "A+",
-  "event_count": 251344,
+  "event_count": 194869,
   "by_category": {
     "accountability": {
-      "events": 1892,
+      "events": 1700,
       "grade": "A+",
-      "score": 98.2
+      "score": 98.6
     },
     "environmental": {
       "events": 2,
@@ -18,24 +18,24 @@
       "score": 40.0
     },
     "fairness": {
-      "events": 237157,
+      "events": 182407,
       "grade": "A+",
       "score": 100.0
     },
     "privacy": {
-      "events": 7942,
+      "events": 7166,
       "grade": "A+",
-      "score": 99.8
+      "score": 99.9
     },
     "safety": {
-      "events": 560,
+      "events": 463,
       "grade": "A+",
       "score": 100.0
     },
     "transparency": {
-      "events": 3659,
+      "events": 2999,
       "grade": "A+",
-      "score": 99.6
+      "score": 99.7
     }
   }
 }
