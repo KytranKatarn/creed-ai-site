@@ -1,0 +1,8 @@
+{
+  "projectId": "9a8b18d4-a39c-4d84-8db8-057142bbc5e9",
+  "shape": "styles-only",
+  "readmeHeader": ".design-sync/conventions.md",
+  "sourceCssDir": "css",
+  "loadOrderSource": "index.html",
+  "outDir": "ds-bundle"
+}
