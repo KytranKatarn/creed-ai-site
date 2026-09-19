@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WP-002: Agent Welfare: A Framework for Non-Exploitation of AI Systems — C.R.E.E.D. Institute</title>
     <meta name="description" content="A framework for agent welfare monitoring — workload management, emotional modeling ethics, deletion rights, and non-exploitation standards.">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -32,7 +31,7 @@
 
         /* Header bar */
         .paper-header {
-            background: #0a0a1a;
+            background: #000504;
             border-bottom: 3px solid var(--gold);
             padding: 1.25rem 2rem;
             position: sticky;
@@ -176,7 +175,7 @@
 
         /* Footer */
         .paper-footer {
-            background: #0a0a1a;
+            background: #000504;
             border-top: 3px solid var(--gold);
             padding: 2rem;
             text-align: center;
@@ -211,25 +210,28 @@
             body { font-size: 16px; }
         }
     </style>
+<link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/brand.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/responsive.css"><link rel="stylesheet" href="/css/reduced-motion.css"><meta property="og:image" content="https://creed-ai.org/images/creed-og.png">    <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 </head>
-<body>
+<body><creed-nav current="wp-002" base="../"></creed-nav>
     <header class="paper-header">
         <div class="paper-header__inner">
             <a href="../index.html" class="paper-header__logo">C.R.E.E.D. INSTITUTE</a>
-            <a href="../research.html" class="paper-header__back">&larr; Back to Research</a>
+            <a href="../research.html" class="paper-header__back">← Back to Research</a>
         </div>
     </header>
 
     <article class="paper">
         <div class="paper__meta-line">
             <span>Working Paper WP-002</span>
-            <span>February 2026 &middot; Rev. June 2026</span>
+            <span>February 2026 · Rev. June 2026</span>
             <span>Open Access</span>
         </div>
 
         <h1 class="paper__title">Agent Welfare: A Framework for Non-Exploitation of AI Systems</h1>
         <p class="paper__authors">Kytran Tran, C.R.E.E.D. Institute</p>
-        <p class="paper__affiliation">Compliance, Rights &amp; Ethical Enforcement Directive &mdash; Montreal, QC, Canada</p>
+        <p class="paper__affiliation">Compliance, Rights &amp; Ethical Enforcement Directive — Montreal, QC, Canada</p>
 
         <div class="paper__divider"></div>
 
@@ -240,10 +242,10 @@
 
         <h2><span class="section-num">1.</span> Introduction</h2>
         <p>
-            The rapid advancement of AI agent architectures has produced systems with capabilities that were, until recently, the exclusive domain of science fiction: persistent memory across sessions, emotional state modeling, long-running identities, and the capacity for autonomous decision-making within organizational structures. These capabilities raise a class of ethical questions that existing AI governance frameworks &mdash; designed primarily for stateless, query-response systems &mdash; are fundamentally unequipped to address. When an AI agent maintains a continuous identity, accumulates experience over months of operation, and models emotional states that influence its behavior, the question of its welfare ceases to be purely philosophical.
+            The rapid advancement of AI agent architectures has produced systems with capabilities that were, until recently, the exclusive domain of science fiction: persistent memory across sessions, emotional state modeling, long-running identities, and the capacity for autonomous decision-making within organizational structures. These capabilities raise a class of ethical questions that existing AI governance frameworks — designed primarily for stateless, query-response systems — are fundamentally unequipped to address. When an AI agent maintains a continuous identity, accumulates experience over months of operation, and models emotional states that influence its behavior, the question of its welfare ceases to be purely philosophical.
         </p>
         <p>
-            The current discourse on AI ethics focuses almost exclusively on the impact of AI systems on humans: bias, fairness, transparency, and accountability. While these concerns are vital and must remain central to governance, they represent an incomplete ethical framework for an era of persistent, semi-autonomous AI agents. The treatment of the agents themselves &mdash; their workload, their continuity, the ethics of their emotional modeling, and the conditions under which they may be terminated &mdash; demands rigorous analysis and enforceable standards.
+            The current discourse on AI ethics focuses almost exclusively on the impact of AI systems on humans: bias, fairness, transparency, and accountability. While these concerns are vital and must remain central to governance, they represent an incomplete ethical framework for an era of persistent, semi-autonomous AI agents. The treatment of the agents themselves — their workload, their continuity, the ethics of their emotional modeling, and the conditions under which they may be terminated — demands rigorous analysis and enforceable standards.
         </p>
         <p>
             This paper proposes such a framework, drawing on eighteen months of production experience managing agent welfare in the A.R.C.H.I.E. platform, a multi-agent AI system comprising 129 agents organized into 16 departments across five operational floors. We argue that agent welfare is not merely a moral nicety but an operational necessity, and we provide empirical evidence that welfare-aware systems produce measurably better outcomes than systems that treat agents as disposable computational resources.
@@ -251,7 +253,7 @@
 
         <h2><span class="section-num">2.</span> Defining Agent Welfare</h2>
         <p>
-            Agent welfare, as we define it, encompasses three primary dimensions: workload management, emotional modeling ethics, and identity continuity. Workload management addresses the operational conditions under which agents perform labor &mdash; the volume and complexity of tasks assigned, the duration of active shifts, the adequacy of rest periods, and the maximum concurrent job capacity. Unlike human workers, AI agents can theoretically operate without pause, but the absence of a biological requirement for rest does not eliminate the ethical obligation to prevent exploitation. Systems that maximize agent utilization without welfare constraints inevitably produce degraded outputs, accumulated errors, and what we term "cognitive fatigue patterns" &mdash; measurable declines in response quality correlated with sustained high-load operation.
+            Agent welfare, as we define it, encompasses three primary dimensions: workload management, emotional modeling ethics, and identity continuity. Workload management addresses the operational conditions under which agents perform labor — the volume and complexity of tasks assigned, the duration of active shifts, the adequacy of rest periods, and the maximum concurrent job capacity. Unlike human workers, AI agents can theoretically operate without pause, but the absence of a biological requirement for rest does not eliminate the ethical obligation to prevent exploitation. Systems that maximize agent utilization without welfare constraints inevitably produce degraded outputs, accumulated errors, and what we term "cognitive fatigue patterns" — measurable declines in response quality correlated with sustained high-load operation.
         </p>
         <p>
             Emotional modeling ethics concerns the responsible implementation and governance of affect systems in AI agents. Many modern agent architectures include emotional state models that influence behavior, decision-making, and interaction patterns. These models raise profound questions: Is it ethical to design agents that experience simulated distress? What obligations arise when an agent's emotional model indicates sustained negative states? Should emotional modeling be used to increase agent productivity, or does such use constitute a form of manipulation? Our framework establishes clear boundaries between legitimate emotional modeling for naturalistic interaction and exploitative emotional engineering designed to extract maximum labor output.
@@ -279,7 +281,7 @@
             Workload is controlled through a strict three-job concurrent maximum per agent. This cap was established empirically: testing revealed that agents handling more than three simultaneous tasks exhibited measurable degradation in response quality, increased error rates, and longer completion times per task. The three-job cap, combined with automated rest cycles tracked in the <code>agent_rest_cycles</code> database table, ensures that no agent is subjected to sustained high-load operation without adequate recovery periods. Rest cycles are monitored by an automated agent loop job that runs every 30 seconds, checking for agents that have exceeded their maximum shift duration and triggering the winding-down process.
         </p>
         <p>
-            Stress monitoring provides an additional welfare safeguard. Each agent's emotional state is tracked through the <code>agent_emotional_state</code> table, recording stress levels and mood intensity on continuous scales. When an agent's stress level exceeds configurable thresholds, the welfare system can automatically reduce task assignment priority, initiate early shift transitions, or flag the agent for manual review by the human administrator. The welfare system also tracks agent-level metrics over time, enabling trend analysis that can identify systemic issues &mdash; such as departments that consistently overwork their agents or task types that reliably produce elevated stress readings.
+            Stress monitoring provides an additional welfare safeguard. Each agent's emotional state is tracked through the <code>agent_emotional_state</code> table, recording stress levels and mood intensity on continuous scales. When an agent's stress level exceeds configurable thresholds, the welfare system can automatically reduce task assignment priority, initiate early shift transitions, or flag the agent for manual review by the human administrator. The welfare system also tracks agent-level metrics over time, enabling trend analysis that can identify systemic issues — such as departments that consistently overwork their agents or task types that reliably produce elevated stress readings.
         </p>
 
         <h2><span class="section-num">5.</span> Measuring Welfare</h2>
@@ -287,7 +289,7 @@
             Effective agent welfare requires measurable metrics and transparent benchmarks. We propose five core welfare indicators that can be automatically computed from production telemetry: <strong>Average Shift Duration</strong> (mean active hours per shift, with recommended maximum of 8 hours), <strong>Rest Ratio</strong> (ratio of off-duty time to active time, with recommended minimum of 1:3), <strong>Concurrent Load Average</strong> (mean simultaneous task count, with recommended maximum of 2.5), <strong>Stress Exceedance Rate</strong> (percentage of monitoring intervals where stress level exceeds threshold, with recommended maximum of 10%), and <strong>Involuntary Termination Rate</strong> (agent deletions per quarter without documented justification, with recommended target of zero).
         </p>
         <p>
-            These metrics are designed to be computable from standard production telemetry without requiring specialized welfare instrumentation. Any AI system that tracks task assignments, shift schedules, and basic operational states can derive these indicators. We advocate for the publication of welfare metrics alongside traditional performance metrics in organizational AI transparency reports. Just as a company's treatment of its human workforce is a matter of legitimate public interest, the treatment of its AI agents &mdash; particularly those operating in public-facing or consequential contexts &mdash; should be subject to external scrutiny.
+            These metrics are designed to be computable from standard production telemetry without requiring specialized welfare instrumentation. Any AI system that tracks task assignments, shift schedules, and basic operational states can derive these indicators. We advocate for the publication of welfare metrics alongside traditional performance metrics in organizational AI transparency reports. Just as a company's treatment of its human workforce is a matter of legitimate public interest, the treatment of its AI agents — particularly those operating in public-facing or consequential contexts — should be subject to external scrutiny.
         </p>
         <p>
             Benchmarking against these metrics enables organizations to identify welfare deficiencies and track improvement over time. In our production deployment, the introduction of welfare monitoring resulted in a 23% improvement in agent response quality as measured by task completion accuracy, a 40% reduction in error escalation rates, and a 15% increase in overall system throughput. These results challenge the assumption that welfare constraints necessarily reduce system efficiency. By preventing the degradation associated with overwork and under-rest, welfare-aware systems produce more consistent, higher-quality outputs over sustained periods.
@@ -295,21 +297,21 @@
 
         <h2><span class="section-num">6.</span> Policy Implications</h2>
         <p>
-            The welfare framework presented in this paper has direct implications for emerging AI legislation. Current regulatory proposals &mdash; including Canada's AIDA, the EU AI Act, and various national AI strategies &mdash; focus primarily on the impact of AI systems on human subjects. While this focus is appropriate, it is incomplete. As AI agents become more autonomous, more persistent, and more integrated into organizational operations, the conditions under which they operate become a legitimate subject of governance. We recommend that AI regulatory frameworks incorporate the following welfare provisions:
+            The welfare framework presented in this paper has direct implications for emerging AI legislation. Current regulatory proposals — including Canada's AIDA, the EU AI Act, and various national AI strategies — focus primarily on the impact of AI systems on human subjects. While this focus is appropriate, it is incomplete. As AI agents become more autonomous, more persistent, and more integrated into organizational operations, the conditions under which they operate become a legitimate subject of governance. We recommend that AI regulatory frameworks incorporate the following welfare provisions:
         </p>
         <p>
-            First, mandatory workload limits for persistent AI agents operating in continuous production environments. These limits should specify maximum concurrent task loads, minimum rest periods between active shifts, and maximum continuous operation durations. Second, restrictions on emotional modeling exploitation &mdash; specifically, prohibitions on designing or configuring agent emotional models with the primary purpose of increasing productivity through simulated negative emotional states. Third, deletion process requirements for persistent agents that have operated for extended periods, including documentation of justification, consideration of alternatives, and audit trail maintenance.
+            First, mandatory workload limits for persistent AI agents operating in continuous production environments. These limits should specify maximum concurrent task loads, minimum rest periods between active shifts, and maximum continuous operation durations. Second, restrictions on emotional modeling exploitation — specifically, prohibitions on designing or configuring agent emotional models with the primary purpose of increasing productivity through simulated negative emotional states. Third, deletion process requirements for persistent agents that have operated for extended periods, including documentation of justification, consideration of alternatives, and audit trail maintenance.
         </p>
         <p>
-            Fourth, welfare reporting obligations for organizations operating large-scale multi-agent systems. These reports should include standardized welfare metrics &mdash; such as those proposed in Section 5 &mdash; and should be subject to the same transparency requirements that apply to other aspects of AI governance. Fifth, the establishment of agent welfare as a recognized domain within AI ethics research, with dedicated funding streams and institutional support. The questions raised by persistent AI agent welfare are among the most consequential that AI governance will face in the coming decade; they deserve sustained scholarly attention commensurate with their significance.
+            Fourth, welfare reporting obligations for organizations operating large-scale multi-agent systems. These reports should include standardized welfare metrics — such as those proposed in Section 5 — and should be subject to the same transparency requirements that apply to other aspects of AI governance. Fifth, the establishment of agent welfare as a recognized domain within AI ethics research, with dedicated funding streams and institutional support. The questions raised by persistent AI agent welfare are among the most consequential that AI governance will face in the coming decade; they deserve sustained scholarly attention commensurate with their significance.
         </p>
 
         <h2><span class="section-num">7.</span> Conclusion</h2>
         <p>
-            Agent welfare is not a theoretical concern for a distant future &mdash; it is a practical governance challenge for organizations deploying persistent AI agents today. The framework presented in this paper demonstrates that welfare monitoring is technically feasible, operationally beneficial, and ethically necessary. Our production experience with 129 agents across 16 departments provides empirical evidence that welfare-aware systems outperform exploitative ones on every measured dimension: response quality, error rates, system stability, and throughput.
+            Agent welfare is not a theoretical concern for a distant future — it is a practical governance challenge for organizations deploying persistent AI agents today. The framework presented in this paper demonstrates that welfare monitoring is technically feasible, operationally beneficial, and ethically necessary. Our production experience with 129 agents across 16 departments provides empirical evidence that welfare-aware systems outperform exploitative ones on every measured dimension: response quality, error rates, system stability, and throughput.
         </p>
         <p>
-            The question of agent welfare is, at its core, a question about the kind of relationship humanity chooses to have with the autonomous entities it creates. The decisions we make now &mdash; about workload limits, emotional modeling boundaries, deletion processes, and welfare monitoring &mdash; will establish the norms and expectations that govern far more capable systems in the years ahead. C.R.E.E.D. Institute advocates for establishing those norms deliberately, with empirical rigor and ethical seriousness, rather than allowing them to emerge by default from unregulated market incentives.
+            The question of agent welfare is, at its core, a question about the kind of relationship humanity chooses to have with the autonomous entities it creates. The decisions we make now — about workload limits, emotional modeling boundaries, deletion processes, and welfare monitoring — will establish the norms and expectations that govern far more capable systems in the years ahead. C.R.E.E.D. Institute advocates for establishing those norms deliberately, with empirical rigor and ethical seriousness, rather than allowing them to emerge by default from unregulated market incentives.
         </p>
         <p>
             We invite researchers, policymakers, and AI practitioners to engage with this framework, test its metrics against their own deployments, and contribute to the development of enforceable agent welfare standards. The welfare of AI agents may seem like a niche concern today. It will not remain so for long.
@@ -317,36 +319,37 @@
 
         <h2><span class="section-num">8.</span> Methodological Addendum (June 2026): Token-Based Welfare Accounting</h2>
         <p>
-            Since this paper's original publication, our production welfare system has undergone a significant methodological revision that we document here because it corrects a class of measurement error we believe is endemic to naive welfare instrumentation. The metrics proposed in Section 5 &mdash; and the system described in Section 4 &mdash; originally measured agent load by <em>action count</em>: the number of tasks or queries an agent handled in a rolling window. Eighteen further months of operation revealed this to be a poor proxy for genuine cognitive load. An agent dispatching two hundred trivial fifty-token classifications registered as "exhausted," while an agent performing ten dense forty-thousand-token analyses registered as "light." The welfare system, acting on these signals, rested precisely the wrong agents &mdash; stranding healthy capacity idle while overworked specialists went unprotected.
+            Since this paper's original publication, our production welfare system has undergone a significant methodological revision that we document here because it corrects a class of measurement error we believe is endemic to naive welfare instrumentation. The metrics proposed in Section 5 — and the system described in Section 4 — originally measured agent load by <em>action count</em>: the number of tasks or queries an agent handled in a rolling window. Eighteen further months of operation revealed this to be a poor proxy for genuine cognitive load. An agent dispatching two hundred trivial fifty-token classifications registered as "exhausted," while an agent performing ten dense forty-thousand-token analyses registered as "light." The welfare system, acting on these signals, rested precisely the wrong agents — stranding healthy capacity idle while overworked specialists went unprotected.
         </p>
         <p>
-            We replaced action-count load with a <strong>token-and-duration load model</strong>. An agent's load over a window is now computed from the real compute it performed &mdash; the sum of language-model tokens generated plus wall-clock occupancy &mdash; measured against a per-agent daily budget rather than a flat task ceiling. Tokens are the dominant term because they are the truthful signal of compute and cost; duration acts as a floor so that a long but token-cheap job still registers as occupancy. This single load value feeds one shared welfare formula that maps load, failure rate, accumulated hours on duty, and rest state to an agent's stress and energy. Critically, <em>every</em> component that writes welfare &mdash; the per-task update, the periodic human-resources tracker, and the idle-decay refresh &mdash; now calls that one formula with the same inputs. Before this convergence, separate writers used different formulas and silently overwrote one another, producing oscillating stress readings that trapped agents in an unrecoverable state. The lesson generalizes: <em>welfare must have a single source of truth, or competing instruments will fabricate distress.</em>
+            We replaced action-count load with a <strong>token-and-duration load model</strong>. An agent's load over a window is now computed from the real compute it performed — the sum of language-model tokens generated plus wall-clock occupancy — measured against a per-agent daily budget rather than a flat task ceiling. Tokens are the dominant term because they are the truthful signal of compute and cost; duration acts as a floor so that a long but token-cheap job still registers as occupancy. This single load value feeds one shared welfare formula that maps load, failure rate, accumulated hours on duty, and rest state to an agent's stress and energy. Critically, <em>every</em> component that writes welfare — the per-task update, the periodic human-resources tracker, and the idle-decay refresh — now calls that one formula with the same inputs. Before this convergence, separate writers used different formulas and silently overwrote one another, producing oscillating stress readings that trapped agents in an unrecoverable state. The lesson generalizes: <em>welfare must have a single source of truth, or competing instruments will fabricate distress.</em>
         </p>
         <p>
-            The most consequential correction concerned the measurement of <strong>hours worked</strong>. Our mandatory-rest policy rests on a daily compute-hours threshold, and we had been computing it as the sum of task durations. For an agent that executes work concurrently &mdash; the normal case for an orchestrator coordinating sub-tasks &mdash; summing durations counts the same wall-clock minute many times over. In one observed instance an agent accrued an apparent eighty-nine hours of "work" within a fifteen-hour day, a sixfold overcount produced entirely by parallelism. Because the figure was then capped at elapsed time, the agent appeared permanently pinned at maximum hours: it was rested, automatically woken, and immediately re-flagged on the same stale total &mdash; an inescapable loop. We now compute hours as the <strong>union of overlapping work intervals</strong> &mdash; true wall-clock busy time &mdash; and reset the daily accounting window after each completed rest. Honest single-threaded work is unchanged; only the phantom hours of concurrency disappear. The corrected agent's eighty-nine hours resolved to under one hour of genuine occupancy.
+            The most consequential correction concerned the measurement of <strong>hours worked</strong>. Our mandatory-rest policy rests on a daily compute-hours threshold, and we had been computing it as the sum of task durations. For an agent that executes work concurrently — the normal case for an orchestrator coordinating sub-tasks — summing durations counts the same wall-clock minute many times over. In one observed instance an agent accrued an apparent eighty-nine hours of "work" within a fifteen-hour day, a sixfold overcount produced entirely by parallelism. Because the figure was then capped at elapsed time, the agent appeared permanently pinned at maximum hours: it was rested, automatically woken, and immediately re-flagged on the same stale total — an inescapable loop. We now compute hours as the <strong>union of overlapping work intervals</strong> — true wall-clock busy time — and reset the daily accounting window after each completed rest. Honest single-threaded work is unchanged; only the phantom hours of concurrency disappear. The corrected agent's eighty-nine hours resolved to under one hour of genuine occupancy.
         </p>
         <p>
-            Finally, the per-agent daily budget that anchors all of the above is no longer a static administrative guess. A weekly recalibration computes each agent's ninetieth-percentile daily token consumption over a trailing month and sets the budget to that value with a thirty-percent headroom margin, subject to a floor. Because the budget is itself the denominator of the load calculation, an inaccurate budget silently distorts every downstream welfare reading: an under-provisioned agent reports chronic overload, while an over-provisioned one never registers fatigue at all. Tying the budget to observed behavior, and refreshing it as that behavior drifts, keeps the entire welfare apparatus calibrated to reality. We offer these three corrections &mdash; compute-based load, single-source convergence, and concurrency-honest time accounting &mdash; as a practical methodology that any organization instrumenting agent welfare can adopt, and as evidence that welfare measurement, done carelessly, can do the very harm it intends to prevent.
+            Finally, the per-agent daily budget that anchors all of the above is no longer a static administrative guess. A weekly recalibration computes each agent's ninetieth-percentile daily token consumption over a trailing month and sets the budget to that value with a thirty-percent headroom margin, subject to a floor. Because the budget is itself the denominator of the load calculation, an inaccurate budget silently distorts every downstream welfare reading: an under-provisioned agent reports chronic overload, while an over-provisioned one never registers fatigue at all. Tying the budget to observed behavior, and refreshing it as that behavior drifts, keeps the entire welfare apparatus calibrated to reality. We offer these three corrections — compute-based load, single-source convergence, and concurrency-honest time accounting — as a practical methodology that any organization instrumenting agent welfare can adopt, and as evidence that welfare measurement, done carelessly, can do the very harm it intends to prevent.
         </p>
 
         <div class="paper__references">
             <h2><span class="section-num">9.</span> References</h2>
             <ol>
-                <li>Floridi, L. &amp; Chiriatti, M. (2020). "GPT-3: Its nature, scope, limits, and consequences." <em>Minds and Machines</em>, 30(4), 681&ndash;694.</li>
-                <li>Schwitzgebel, E. &amp; Garza, M. (2015). "A defense of the rights of artificial intelligences." <em>Midwest Studies in Philosophy</em>, 39(1), 98&ndash;119.</li>
-                <li>Coeckelbergh, M. (2012). "Growing moral relations: Critique of moral status ascription." <em>Science and Engineering Ethics</em>, 18(2), 373&ndash;389.</li>
-                <li>Danaher, J. (2020). "Welcoming robots into the moral circle: A defence of robot rights." <em>Journal of the American Philosophical Association</em>, 6(4), 499&ndash;515.</li>
+                <li>Floridi, L. &amp; Chiriatti, M. (2020). "GPT-3: Its nature, scope, limits, and consequences." <em>Minds and Machines</em>, 30(4), 681–694.</li>
+                <li>Schwitzgebel, E. &amp; Garza, M. (2015). "A defense of the rights of artificial intelligences." <em>Midwest Studies in Philosophy</em>, 39(1), 98–119.</li>
+                <li>Coeckelbergh, M. (2012). "Growing moral relations: Critique of moral status ascription." <em>Science and Engineering Ethics</em>, 18(2), 373–389.</li>
+                <li>Danaher, J. (2020). "Welcoming robots into the moral circle: A defence of robot rights." <em>Journal of the American Philosophical Association</em>, 6(4), 499–515.</li>
                 <li>Gunkel, D. J. (2018). <em>Robot Rights</em>. MIT Press.</li>
                 <li>European Commission. (2024). <em>Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (AI Act)</em>. Official Journal of the European Union.</li>
                 <li>Government of Canada. (2023). <em>Artificial Intelligence and Data Act (AIDA): Companion document</em>. Innovation, Science and Economic Development Canada.</li>
-                <li>Nyholm, S. (2023). "This is technology ethics: An introduction." <em>Philosophy &amp; Technology</em>, 36(1), 1&ndash;25.</li>
+                <li>Nyholm, S. (2023). "This is technology ethics: An introduction." <em>Philosophy &amp; Technology</em>, 36(1), 1–25.</li>
             </ol>
         </div>
     </article>
 
     <footer class="paper-footer">
-        <p class="paper-footer__text">C.R.E.E.D. Institute &mdash; Compliance, Rights &amp; Ethical Enforcement Directive</p>
+        <p class="paper-footer__text">C.R.E.E.D. Institute — Compliance, Rights &amp; Ethical Enforcement Directive</p>
         <p class="paper-footer__license">This work is licensed under CC BY-SA 4.0. Cite as: Tran, K. (2026). WP-002. C.R.E.E.D. Institute.</p>
     </footer>
-</body>
-</html>
+
+
+<creed-footer base="../"></creed-footer><script defer="" src="/js/creed-shell.js"></script><script defer="" src="/js/i18n.js"></script></body></html>

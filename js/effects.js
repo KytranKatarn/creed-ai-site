@@ -22,6 +22,8 @@ var Effects = (function () {
     /* ---- Magnetic Elements ---- */
     function initMagnetic() {
         if (isTouch) return;
+        /* gsap now ships only on pages that use .magnetic — degrade quietly elsewhere. */
+        if (typeof gsap === 'undefined') return;
         var els = document.querySelectorAll('.magnetic');
         var strength = 0.3;
 
