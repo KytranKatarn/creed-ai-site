@@ -6,15 +6,18 @@
    an honest "provisional / insufficient data" state instead of a confident
    grade (the API's provisional gate; see js/governance.js for the same rule).
 
-   Barba note (identical rationale to governance.js): the site uses barba.js SPA
-   transitions which swap only <main> via innerHTML, so an inline per-page script
-   never runs on an in-site nav click. This is a global module loaded on every
-   page; Directory.init() runs on DOMContentLoaded and from the barba `after`
+   Loaded on every page; Directory.init() no-ops unless #dir-grid is present.
+
+   Related-party disclosure: every organization currently listed is the Institute
+   itself, its parent company, a kytranempowerment.com subdomain, or a Kytran-
+   operated product. Presenting those identically to an independent adopter would
+   overstate adoption, so each card is flagged and an "Independent" filter is
+   offered. It legitimately returns zero today; that is the honest number.
    hook (transitions.js). It no-ops on pages without the #dir-grid widget.
    ========================================================================== */
 
 var Directory = {
-    API_URL: 'https://creed.kytranempowerment.com/api/v1/orgs',
+    API_URL: 'https://api.creed-ai.org/api/v1/orgs',
     FALLBACK_URL: '/data/directory-fallback.json',
     REFRESH_MS: 120000,
     MIN_EVENTS: 100, // overall-grade gate (a pillar needs >=100 events to count)
@@ -44,6 +47,18 @@ var Directory = {
 
     // An org is provisional when the API says so, or its grade isn't a real
     // letter grade, or it simply hasn't logged enough governance events yet.
+    // A listing is a related party when it is the Institute, its parent company,
+    // or anything operated by them. Kept as data, not as a judgement: the flag
+    // says who is related, and the reader decides what that is worth.
+    RELATED_DOMAINS: ['creed-ai.org', 'kytranempowerment.com', 'what-the-fact.com'],
+
+    isRelatedParty: function (org) {
+        if (org.related_party === true) return true;
+        var host = '';
+        try { host = new URL(org.website || org.url || '').hostname.toLowerCase(); } catch (e) { return false; }
+        return this.RELATED_DOMAINS.some(function (d) { return host === d || host.endsWith('.' + d); });
+    },
+
     isProvisional: function (org) {
         if (org.provisional === true) return true;
         var g = org.grade ? String(org.grade).toUpperCase() : '';
@@ -79,6 +94,17 @@ var Directory = {
         this.applyStyles(nameEl, { fontFamily: "'Orbitron',sans-serif", fontSize: '1.05rem', fontWeight: '700', color: '#e2e8f0', lineHeight: '1.2' });
         nameEl.textContent = org.name || org.slug;
         nameWrap.appendChild(nameEl);
+        if (this.isRelatedParty(org)) {
+            var rel = document.createElement('span');
+            this.applyStyles(rel, {
+                display: 'inline-block', marginTop: '0.3rem', padding: '0.15rem 0.4rem',
+                fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.6rem', letterSpacing: '0.1em',
+                textTransform: 'uppercase', color: '#e8b04b', border: '1px solid #e8b04b'
+            });
+            rel.textContent = 'Related party';
+            rel.title = 'Operated by the C.R.E.E.D. Institute or Kytran Empowerment Inc.';
+            nameWrap.appendChild(rel);
+        }
         if (org.country) {
             var ctryEl = document.createElement('div');
             this.applyStyles(ctryEl, { fontFamily: "'IBM Plex Mono',monospace", fontSize: '0.7rem', color: '#64748b', marginTop: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.06em' });
@@ -141,9 +167,27 @@ var Directory = {
         return card;
     },
 
+    // 'all' | 'independent' | 'related'
+    filter: 'all',
+
+    setFilter: function (mode) {
+        this.filter = mode;
+        var btns = document.querySelectorAll('[data-dir-filter]');
+        btns.forEach(function (b) {
+            var on = b.getAttribute('data-dir-filter') === mode;
+            b.style.background = on ? 'var(--color-primary)' : 'transparent';
+            b.style.color = on ? '#06060f' : 'var(--color-text-muted)';
+        });
+        if (this._last) this.renderOrgs(this._last);
+    },
+
     renderOrgs: function (list) {
         var grid = document.getElementById('dir-grid');
         if (!grid) return;
+        this._last = list;
+        var self0 = this;
+        if (this.filter === 'independent') list = list.filter(function (o) { return !self0.isRelatedParty(o); });
+        else if (this.filter === 'related') list = list.filter(function (o) { return self0.isRelatedParty(o); });
         while (grid.firstChild) grid.removeChild(grid.firstChild);
 
         if (!list || !list.length) {
@@ -163,6 +207,28 @@ var Directory = {
             return Number(b.events_30d || 0) - Number(a.events_30d || 0);
         });
         sorted.forEach(function (org) { grid.appendChild(self.makeOrgCard(org)); });
+
+        // Honest empty state — an empty Independent view is a real answer, not a bug.
+        if (!sorted.length) {
+            var empty = document.createElement('p');
+            self.applyStyles(empty, {
+                gridColumn: '1 / -1', fontFamily: "'IBM Plex Mono',monospace",
+                fontSize: '0.9rem', lineHeight: '1.8', color: 'var(--color-text-muted)',
+                border: '1px solid var(--color-border)', padding: '1.5rem', margin: '0'
+            });
+            empty.textContent = self.filter === 'independent'
+                ? 'No independent organizations are listed yet. Every current listing is the Institute, its parent company, or a Kytran-operated product.'
+                : 'No organizations match this filter.';
+            grid.appendChild(empty);
+        }
+
+        var relCount = self._last.filter(function (o) { return self.isRelatedParty(o); }).length;
+        var disc = document.getElementById('dir-disclosure');
+        if (disc) {
+            disc.textContent = relCount === self._last.length
+                ? 'All ' + relCount + ' listings are related parties \u2014 the Institute, its parent company, or a Kytran-operated product. Independent adopters: 0.'
+                : relCount + ' of ' + self._last.length + ' listings are related parties.';
+        }
 
         var countEl = document.getElementById('dir-count');
         if (countEl) countEl.textContent = String(list.length);

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Schema Validator — C.R.E.E.D. Institute</title>
+    <meta name="description" content="Paste a governance event and check it against C.R.E.E.D. Event Schema v1 in the browser: required fields, pillar and severity enums, the metadata cap and the no-PII rule.">
+    <link rel="canonical" href="https://creed-ai.org/validator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Event Schema Validator — C.R.E.E.D. Institute">
+    <meta property="og:description" content="Paste a governance event and check it against C.R.E.E.D. Event Schema v1 in the browser: required fields, pillar and severity enums, the metadata cap and the no-PII rule.">
+    <meta property="og:url" content="https://creed-ai.org/validator.html">
+    <meta property="og:image" content="https://creed-ai.org/images/creed-og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://creed-ai.org/images/creed-og.png">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/reduced-motion.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-grid { display: grid; gap: var(--space-xl); align-items: start; }
+        .tool-row { display: grid; grid-template-columns: 1fr 140px 90px; gap: var(--space-md); align-items: center; }
+        .tool-panel { background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--space-lg); }
+        .tool-field { width: 100%; padding: 0.7rem 1rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: var(--color-text); font-family: var(--font-body); font-size: var(--text-sm); }
+        .tool-label { display: block; font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+        .tool-pre { margin: 0; font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text); line-height: 1.8; white-space: pre-wrap; word-break: break-word; }
+        .tool-note { text-align: center; color: var(--color-text-muted); font-size: var(--text-xs); margin: var(--space-2xl) auto 0; line-height: 1.7; max-width: 80ch; }
+        .tool-check { display: flex; align-items: flex-start; padding: var(--space-sm) 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .tool-check__mark { flex: 0 0 28px; font-weight: 700; }
+        input[type="range"] { width: 100%; accent-color: var(--color-primary); }
+        @media (max-width: 900px) {
+            .tool-grid { grid-template-columns: 1fr !important; }
+            .tool-row { grid-template-columns: 1fr 1fr; }
+            .tool-row input[type="range"] { grid-column: 1 / -1; }
+        }
+    </style>
+    <script defer src="/js/creed-shell.js"></script>
+    <script defer src="/js/creed-data.js"></script>
+    <script defer src="/js/creed-tools.js"></script>
+    <script defer src="/js/i18n.js"></script>
+    <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+</head>
+<body>
+    <creed-nav current="validator"></creed-nav>
+    <main id="main">
+        <section style="padding: calc(var(--nav-height) + 4rem) 0 var(--space-xl);">
+            <div class="container" style="max-width: 900px; text-align: center;">
+                <p style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: var(--space-md);">Developer tools &middot; Event Schema v1</p>
+                <h1 style="font-family: var(--font-nav); font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--color-text); letter-spacing: 0.04em; margin-bottom: var(--space-md);">Event Schema Validator</h1>
+                <p style="color: var(--color-text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto; text-wrap: pretty;">Paste one governance event as JSON. The checks below mirror the published schema and the rules of the feed, so you can see exactly why an event would be accepted or rejected before you POST it. Nothing leaves your browser.</p>
+            </div>
+        </section>
+        <section style="padding: 0 0 var(--space-3xl);">
+            <div class="container" style="max-width: 1100px;">
+                <div class="tool-grid" style="grid-template-columns: 1.1fr 1fr;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm); flex-wrap: wrap;">
+                            <label for="val-json" class="tool-label" style="margin: 0;">Event JSON</label>
+                            <div style="display: inline-flex; gap: var(--space-xs); flex-wrap: wrap;">
+                                <button type="button" id="val-ex-ok" class="btn btn--outline" style="padding: 0.35rem 0.9rem; font-size: var(--text-xs);">Valid example</button>
+                                <button type="button" id="val-ex-bad" class="btn btn--outline" style="padding: 0.35rem 0.9rem; font-size: var(--text-xs);">Rejected example</button>
+                            </div>
+                        </div>
+                        <textarea id="val-json" rows="18" spellcheck="false" class="tool-field" style="padding: var(--space-md); line-height: 1.6; resize: vertical; tab-size: 2;"></textarea>
+                        <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-sm); line-height: 1.6;">POST it as <code style="color: var(--color-text);">application/json</code> to <code style="color: var(--color-text);">/api/v1/events</code> with <code style="color: var(--color-text);">Authorization: Bearer creed_sk_&hellip;</code>.</p>
+                    </div>
+                    <div>
+                        <div id="val-verdict" style="border-radius: var(--border-radius); padding: var(--space-lg);">
+                            <div id="val-verdict-title" role="status" style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700;"></div>
+                            <p id="val-verdict-detail" style="color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.6; margin: var(--space-sm) 0 0;"></p>
+                        </div>
+                        <ol id="val-checks" style="list-style: none; padding: 0; margin: var(--space-lg) 0 0;"></ol>
+                    </div>
+                </div>
+                <p class="tool-note">Mirrors the published <a href="/standard.html">Event Schema v1</a>: six required string fields, <code style="color: var(--color-text);">category</code> in the six pillars, severity weights 0 / 1 / 3 / 5, <code style="color: var(--color-text);">metadata</code> &le; 4 KB, and no emails or phone numbers anywhere. The hosted ingest is authoritative.</p>
+            </div>
+        </section>
+    </main>
+    <creed-footer></creed-footer>
+</body>
+</html>

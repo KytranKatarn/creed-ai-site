@@ -14,7 +14,7 @@
    ========================================================================== */
 
 var Governance = {
-    API_URL: 'https://creed.kytranempowerment.com/api/v1/scores',
+    API_URL: 'https://api.creed-ai.org/api/v1/scores',
     REFRESH_MS: 60000,
     _timer: null,
 

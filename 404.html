@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 — Page Not Found | C.R.E.E.D. Institute</title>
     <meta name="description" content="The page you're looking for doesn't exist or has been moved.">
-    <meta name="theme-color" content="#0a0a1a">
+    <meta name="theme-color" content="#000504">
     <meta name="robots" content="noindex">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Orbitron:wght@400;500;700;900&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Orbitron:wght@400;500;700;900&amp;family=IBM+Plex+Mono:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/brand.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css?v=20260407u">
     <link rel="stylesheet" href="css/reduced-motion.css">
@@ -37,7 +37,7 @@
         .error-hero__subtitle {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #e2e8f0;
+            color: var(--color-text);
             letter-spacing: 0.15em;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
@@ -45,7 +45,7 @@
         .error-hero__text {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 1rem;
-            color: #94a3b8;
+            color: var(--color-text-muted);
             max-width: 500px;
             margin: 0 auto 2.5rem;
             line-height: 1.7;
@@ -57,6 +57,8 @@
             flex-wrap: wrap;
         }
     </style>
+<meta property="og:image" content="https://creed-ai.org/images/creed-og.png">    <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 </head>
 <body>
     <!-- Global background layers -->
@@ -66,29 +68,10 @@
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- Navigation -->
-    <nav class="nav" id="mainNav">
-        <div class="nav__inner container">
-            <a href="/" class="nav__logo"><span class="nav__logo-text">C.R.E.E.D.</span></a>
-            <div class="nav__links" id="navLinks">
-                <a href="about.html" class="nav__link">About</a>
-                <a href="programs.html" class="nav__link">Programs</a>
-                <a href="research.html" class="nav__link">Research</a>
-                <a href="governance.html" class="nav__link">Governance</a>
-                <a href="platform.html" class="nav__link">Platform</a>
-                <a href="manifesto.html" class="nav__link">Manifesto</a>
-                <a href="news.html" class="nav__link">News</a>
-                <a href="get-involved.html" class="nav__link">Get Involved</a>
-                <a href="donate.html" class="nav__link nav__link--cta">Donate</a>
-            </div>
-            <button class="nav__lang" id="langToggle" aria-label="Change language">EN</button>
-            <button class="nav__menu-btn" id="menuToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+    <creed-nav></creed-nav>
 
     <!-- 404 Content -->
-    <main>
+    <main id="main">
         <section class="error-hero">
             <div class="container">
                 <div class="error-hero__code">404</div>
@@ -103,36 +86,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer__inner container">
-            <div class="footer__brand">
-                <span class="footer__logo">C.R.E.E.D. INSTITUTE</span>
-                <p class="footer__tagline">Preventive AI Ethics</p>
-            </div>
-            <div class="footer__links">
-                <a href="about.html">About</a>
-                <a href="programs.html">Programs</a>
-                <a href="research.html">Research</a>
-                <a href="case-studies.html">Case Studies</a>
-                <a href="governance.html">Governance</a>
-                <a href="get-scored.html">Get Scored</a>
-                <a href="standard.html">Event Standard</a>
-                <a href="policy.html">Policy</a>
-                <a href="manifesto.html">Manifesto</a>
-                <a href="news.html">News</a>
-                <a href="press.html">Press</a>
-                <a href="get-involved.html">Get Involved</a>
-                <a href="donate.html">Donate</a>
-                <a href="partners.html">Partners</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer__copy">&copy; 2026 C.R.E.E.D. Institute. Canadian Registered Nonprofit. All rights reserved.</div>
-            <p class="footer__initiative">A founding initiative of Kytran Empowerment Inc.</p>
-        </div>
-    </footer>
+    <creed-footer></creed-footer>
 
     <!-- Scripts -->
-    <script defer src="js/effects.js"></script>
-    <script defer src="js/nav.js?v=20260407u"></script>
-</body>
-</html>
+    <script defer="" src="/js/creed-shell.js"></script><script defer="" src="js/effects.js"></script>
+    
+
+
+<script defer="" src="/js/i18n.js"></script></body></html>

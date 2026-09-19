@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badge Generator — C.R.E.E.D. Institute</title>
+    <meta name="description" content="Enter your organization slug and copy a ready-made HTML, Markdown or reStructuredText snippet for a live C.R.E.E.D. transparency badge.">
+    <link rel="canonical" href="https://creed-ai.org/badge.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Badge Generator — C.R.E.E.D. Institute">
+    <meta property="og:description" content="Enter your organization slug and copy a ready-made HTML, Markdown or reStructuredText snippet for a live C.R.E.E.D. transparency badge.">
+    <meta property="og:url" content="https://creed-ai.org/badge.html">
+    <meta property="og:image" content="https://creed-ai.org/images/creed-og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://creed-ai.org/images/creed-og.png">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/reduced-motion.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-grid { display: grid; gap: var(--space-xl); align-items: start; }
+        .tool-row { display: grid; grid-template-columns: 1fr 140px 90px; gap: var(--space-md); align-items: center; }
+        .tool-panel { background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--space-lg); }
+        .tool-field { width: 100%; padding: 0.7rem 1rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: var(--color-text); font-family: var(--font-body); font-size: var(--text-sm); }
+        .tool-label { display: block; font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+        .tool-pre { margin: 0; font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text); line-height: 1.8; white-space: pre-wrap; word-break: break-word; }
+        .tool-note { text-align: center; color: var(--color-text-muted); font-size: var(--text-xs); margin: var(--space-2xl) auto 0; line-height: 1.7; max-width: 80ch; }
+        .tool-check { display: flex; align-items: flex-start; padding: var(--space-sm) 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .tool-check__mark { flex: 0 0 28px; font-weight: 700; }
+        input[type="range"] { width: 100%; accent-color: var(--color-primary); }
+        @media (max-width: 900px) {
+            .tool-grid { grid-template-columns: 1fr !important; }
+            .tool-row { grid-template-columns: 1fr 1fr; }
+            .tool-row input[type="range"] { grid-column: 1 / -1; }
+        }
+    </style>
+    <script defer src="/js/creed-shell.js"></script>
+    <script defer src="/js/creed-data.js"></script>
+    <script defer src="/js/creed-tools.js"></script>
+    <script defer src="/js/i18n.js"></script>
+    <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+</head>
+<body>
+    <creed-nav current="badge"></creed-nav>
+    <main id="main">
+        <section style="padding: calc(var(--nav-height) + 4rem) 0 var(--space-xl);">
+            <div class="container" style="max-width: 900px; text-align: center;">
+                <p style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: var(--space-md);">For scored organizations</p>
+                <h1 style="font-family: var(--font-nav); font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--color-text); letter-spacing: 0.04em; margin-bottom: var(--space-md);">Badge Generator</h1>
+                <p style="color: var(--color-text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto; text-wrap: pretty;">Enter your organization&rsquo;s slug, choose where the badge should link, and copy a snippet for your README, website or app. The badge is rendered live by the scoring API, so it always shows your current grade &mdash; or <strong style="color: #eab308;">PROVISIONAL</strong> until your feed clears the gate.</p>
+            </div>
+        </section>
+        <section style="padding: 0 0 var(--space-3xl);">
+            <div class="container" style="max-width: 1000px;">
+                <div class="tool-grid" style="grid-template-columns: 1fr 1.2fr;">
+                    <form class="glass-panel" style="padding: var(--space-xl); display: grid; gap: var(--space-lg);" onsubmit="return false;">
+                        <div>
+                            <label for="bg-slug" class="tool-label">Organization slug</label>
+                            <input id="bg-slug" list="bg-slugs" autocomplete="off" spellcheck="false" placeholder="your-org" class="tool-field">
+                            <datalist id="bg-slugs"></datalist>
+                            <p id="bg-hint" style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-sm); line-height: 1.6;"></p>
+                        </div>
+                        <div>
+                            <label for="bg-link" class="tool-label">Badge links to</label>
+                            <select id="bg-link" class="tool-field" style="padding: 0.7rem 0.8rem;">
+                                <option value="directory">Directory profile on creed-ai.org</option>
+                                <option value="scores">Scores API (JSON)</option>
+                                <option value="none">Nothing — image only</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="bg-alt" class="tool-label">Alt text</label>
+                            <input id="bg-alt" value="C.R.E.E.D. transparency score" class="tool-field">
+                        </div>
+                        <p style="font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.6; margin: 0;">Badge URL: <code id="bg-url" style="color: var(--color-text); word-break: break-all;"></code></p>
+                    </form>
+
+                    <div style="display: grid; gap: var(--space-lg);">
+                        <div class="glass-panel" style="padding: var(--space-xl); text-align: center;">
+                            <p class="tool-label">Live preview</p>
+                            <div style="min-height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <img id="bg-img" src="" alt="C.R.E.E.D. transparency score" style="height: 28px; width: auto;">
+                                <p id="bg-img-fail" hidden style="font-size: var(--text-xs); color: var(--color-text-muted); margin: 0;">Preview unavailable from this network &mdash; the snippet still works wherever the API is reachable.</p>
+                            </div>
+                            <p style="font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.7; margin-top: var(--space-md); text-wrap: pretty;">The badge reads PROVISIONAL until the feed has &ge;100 events across &ge;3 pillars over &ge;14 days, and it carries the verification tier &mdash; self-reported, signed or audited. A self-reported A+ visibly claims less than a signed B+.</p>
+                        </div>
+                        <div class="tool-panel" data-snippet="html">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);"><span style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.12em;">HTML</span><button type="button" class="btn btn--outline" data-copy="html" style="padding: 0.35rem 0.9rem; font-size: var(--text-xs);">Copy</button></div>
+                            <pre id="bg-html" class="tool-pre"></pre>
+                        </div>
+                        <div class="tool-panel" data-snippet="md">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);"><span style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.12em;">Markdown</span><button type="button" class="btn btn--outline" data-copy="md" style="padding: 0.35rem 0.9rem; font-size: var(--text-xs);">Copy</button></div>
+                            <pre id="bg-md" class="tool-pre"></pre>
+                        </div>
+                        <div class="tool-panel" data-snippet="rst">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);"><span style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.12em;">reStructuredText</span><button type="button" class="btn btn--outline" data-copy="rst" style="padding: 0.35rem 0.9rem; font-size: var(--text-xs);">Copy</button></div>
+                            <pre id="bg-rst" class="tool-pre"></pre>
+                        </div>
+                    </div>
+                </div>
+                <p class="tool-note" style="font-size: var(--text-sm);">Not scored yet? <a href="/get-scored.html">Get scored &rarr;</a> &middot; Public reads need no key: <code style="color: var(--color-text);">GET /api/v1/orgs/{slug}/scores</code></p>
+            </div>
+        </section>
+    </main>
+    <creed-footer></creed-footer>
+</body>
+</html>
