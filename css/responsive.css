@@ -27,7 +27,10 @@
 /* --------------------------------------------------------------------------
    768px — Mobile Landscape
    -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
+/* Nav collapses at 1199px: ten uppercase Antonio links plus the language chip and
+   Donate button overflow the wordmark from about 1150px down, so the logo collided
+   with the first link between 768px and 1150px. */
+@media (max-width: 1199px) {
     /* --- Navigation: hide links, show hamburger --- */
     .nav__links {
         display: none;
@@ -45,6 +48,7 @@
     }
 
     .nav.nav--menu-open .nav__inner {
+        gap: 1.5rem;
         height: auto;
         flex-wrap: wrap;
         justify-content: center;

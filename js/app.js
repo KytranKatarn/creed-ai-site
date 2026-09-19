@@ -1,40 +1,15 @@
 /* app.js — Entry point for creed-ai.org
- * Dependencies: Lenis, gsap, ScrollTrigger (globals), Effects, Nav, Transitions
+ * Dependencies: gsap (optional, .magnetic only), Effects
+ * Nav is now <creed-nav> in creed-shell.js. Barba/Lenis removed: Barba swapped only
+ * <main>, so per-page CSS and JS never loaded on in-site links. css/base.css already
+ * sets html { scroll-behavior: smooth }, which is what Lenis was for.
  */
 
 document.addEventListener('DOMContentLoaded', function () {
     'use strict';
 
-    /* ---- Lenis Smooth Scroll ---- */
-    var lenis = null;
-    if (typeof Lenis !== 'undefined') {
-        lenis = new Lenis({
-            duration: 1.2,
-            easing: function (t) {
-                return 1 - Math.pow(1 - t, 3);
-            },
-            smoothWheel: true
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-            lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add(function (time) {
-                lenis.raf(time * 1000);
-            });
-            gsap.ticker.lagSmoothing(0);
-        }
-    }
-
-    /* ---- Core Initialization ---- */
-    Nav.init();
+        /* ---- Core Initialization ---- */
     Effects.init();
-    Transitions.init();
 
     /* ---- Page-Specific Init ---- */
     var page = document.querySelector('[data-barba-namespace]');

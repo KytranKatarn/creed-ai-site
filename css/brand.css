@@ -1,0 +1,144 @@
+/* ==========================================================================
+   brand.css — alignment with the 2026 C.R.E.E.D. social branding.
+   Load AFTER css/base.css and BEFORE css/components.css.
+
+   Three things the social branding settled that the site had not:
+
+   1. The secondary colour is GREEN, not cyan. base.css sets
+      --color-secondary: #00e5ff; there is no cyan anywhere in the brand.
+      Sampled from the artwork: #74b22b for rules, circuit traces and icon
+      strokes, #8abe39 for display type on black.
+
+   2. The ground is a green-cast black (#000504), not the blue-navy #0a0a1a.
+      Kept subtle — the difference reads as depth, not as a colour change.
+
+   3. The gold is a metallic RAMP, not a flat swatch: #b87212 deep through
+      #e7a62d to #fbd672 highlight. Flat gold stays --color-primary for text
+      and borders; the ramp is for the wordmark and large display type only.
+      Never a background gradient.
+   ========================================================================== */
+
+:root {
+    /* Ground — green-cast black, matching the artwork */
+    --color-base: #000504;
+    --color-base-raised: #0a0f0c;
+
+    /* Gold: flat for UI, ramp for display */
+    --color-primary: #c9a44c;
+    --gold-deep: #b87212;
+    --gold-mid: #cc861e;
+    --gold-warm: #e7a62d;
+    --gold-light: #fbd672;
+    --gold-ramp: linear-gradient(180deg, #fbd672 0%, #e7a62d 38%, #cc861e 68%, #b87212 100%);
+
+    /* Green — replaces the cyan secondary outright */
+    --color-secondary: #74b22b;
+    --green-display: #8abe39;
+    --green-dim: rgba(116, 178, 43, 0.4);
+    --green-wash: rgba(116, 178, 43, 0.07);
+
+    /* Borders and surfaces re-tinted off the new ground */
+    --color-border: rgba(201, 164, 76, 0.18);
+    --color-border-green: rgba(116, 178, 43, 0.28);
+    --color-glass-bg: rgba(10, 15, 12, 0.55);
+    --color-glass-border: rgba(201, 164, 76, 0.22);
+
+    /* Brand geometry: the logo is a hexagon. Use it for marks and badges,
+       not for content containers — the artwork keeps panels rectangular. */
+    --hex-clip: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* --------------------------------------------------------------------------
+   Metallic wordmark. Display type only — at body sizes the ramp reads as
+   uneven weight and hurts legibility, so it is capped by a min font-size.
+   -------------------------------------------------------------------------- */
+.brand-metal {
+    background: var(--gold-ramp);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+@supports not (background-clip: text) {
+    .brand-metal { color: var(--gold-warm); -webkit-text-fill-color: var(--gold-warm); }
+}
+
+/* The four-letter expansion. The acronym is the brand's clearest asset and
+   the site never spelled it out; this is the canonical treatment. */
+.creed-expansion {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+}
+.creed-expansion__item {
+    padding: var(--space-lg) var(--space-lg) var(--space-lg) 0;
+    border-right: 1px solid var(--color-border);
+}
+.creed-expansion__item:last-child { border-right: none; }
+.creed-expansion__term {
+    font-family: var(--font-nav);
+    font-size: var(--text-sm);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-sm);
+}
+.creed-expansion__def {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+}
+@media (max-width: 900px) {
+    .creed-expansion { grid-template-columns: 1fr 1fr; }
+    .creed-expansion__item:nth-child(2) { border-right: none; }
+}
+@media (max-width: 560px) {
+    .creed-expansion { grid-template-columns: 1fr; }
+    .creed-expansion__item {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        padding-right: 0;
+    }
+}
+
+/* Circuit rule — the horizontal trace-with-nodes divider from the artwork.
+   Decorative only: always aria-hidden, and it collapses under reduced motion
+   rules because it carries no animation to begin with. */
+.circuit-rule {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border) 12%, var(--color-border) 88%, transparent);
+    position: relative;
+}
+.circuit-rule::before,
+.circuit-rule::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 1px solid var(--color-secondary);
+    background: var(--color-base);
+    top: 50%;
+    transform: translateY(-50%);
+}
+.circuit-rule::before { left: 18%; }
+.circuit-rule::after { right: 18%; }
+
+/* Hexagon mark holder, for the logo and for grade badges */
+.hex-mark {
+    clip-path: var(--hex-clip);
+    background: var(--gold-ramp);
+    display: grid;
+    place-items: center;
+}
+.hex-mark > * { clip-path: var(--hex-clip); background: var(--color-base); }
+
+/* The green is an accent, never a large fill: #74b22b on #000504 measures
+   about 6.4:1 for text, but a green field with dark text on it fails. */
+.accent-green { color: var(--color-secondary); }
+.accent-green-display { color: var(--green-display); }

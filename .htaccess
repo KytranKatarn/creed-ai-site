@@ -1,0 +1,63 @@
+# ==========================================================================
+# C.R.E.E.D. Institute — Hostinger / Apache configuration
+# Security headers, compression, and cache policy.
+# CSP allows the governance API for fetch and the live badge images.
+# ==========================================================================
+
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # Adjust the api host below if you consolidate onto api.creed-ai.org.
+    Header always set Content-Security-Policy "default-src 'self'; \
+        script-src 'self' 'unsafe-inline'; \
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+        font-src 'self' https://fonts.gstatic.com; \
+        img-src 'self' data: https://api.creed-ai.org; \
+        connect-src 'self' https://api.creed-ai.org; \
+        frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Immutable vendor libraries, fonts and images — safe to cache for a year.
+    <FilesMatch "^.*\.(woff2?|ttf|eot|png|jpg|jpeg|gif|webp|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <Directory "js/lib">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </Directory>
+
+    # Own CSS/JS: one hour. Use hashed filenames (creed-data.a1b2c3.js) rather
+    # than ?v= query strings, which some proxies ignore for caching.
+    ExpiresByType text/css "access plus 1 hour"
+    ExpiresByType application/javascript "access plus 1 hour"
+
+    # Data snapshots and HTML: always revalidate.
+    ExpiresByType application/json "access plus 5 minutes"
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# public.html and public/index.html were byte-identical meta-refresh redirects to
+# governance.html — two URLs for one page, one of them in the sitemap. A 301 does
+# this correctly and leaves no duplicate content. Delete both HTML files.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^public\.html$        /governance.html [R=301,L]
+    RewriteRule ^public/?$             /governance.html [R=301,L]
+    RewriteRule ^public/index\.html$   /governance.html [R=301,L]
+</IfModule>
+
+ErrorDocument 404 /404.html

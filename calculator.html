@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Calculator — C.R.E.E.D. Institute</title>
+    <meta name="description" content="Change the severity counts and watch the weighted violation rate become a pillar score, a letter grade, and a publication decision. Same maths as the C.R.E.E.D. scoring engine.">
+    <link rel="canonical" href="https://creed-ai.org/calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Score Calculator — C.R.E.E.D. Institute">
+    <meta property="og:description" content="Change the severity counts and watch the weighted violation rate become a pillar score, a letter grade, and a publication decision. Same maths as the C.R.E.E.D. scoring engine.">
+    <meta property="og:url" content="https://creed-ai.org/calculator.html">
+    <meta property="og:image" content="https://creed-ai.org/images/creed-og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://creed-ai.org/images/creed-og.png">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/brand.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/reduced-motion.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-grid { display: grid; gap: var(--space-xl); align-items: start; }
+        .tool-row { display: grid; grid-template-columns: 1fr 140px 90px; gap: var(--space-md); align-items: center; }
+        .tool-panel { background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: var(--space-lg); }
+        .tool-field { width: 100%; padding: 0.7rem 1rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: var(--color-text); font-family: var(--font-body); font-size: var(--text-sm); }
+        .tool-label { display: block; font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+        .tool-pre { margin: 0; font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-text); line-height: 1.8; white-space: pre-wrap; word-break: break-word; }
+        .tool-note { text-align: center; color: var(--color-text-muted); font-size: var(--text-xs); margin: var(--space-2xl) auto 0; line-height: 1.7; max-width: 80ch; }
+        .tool-check { display: flex; align-items: flex-start; padding: var(--space-sm) 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .tool-check__mark { flex: 0 0 28px; font-weight: 700; }
+        input[type="range"] { width: 100%; accent-color: var(--color-primary); }
+        @media (max-width: 900px) {
+            .tool-grid { grid-template-columns: 1fr !important; }
+            .tool-row { grid-template-columns: 1fr 1fr; }
+            .tool-row input[type="range"] { grid-column: 1 / -1; }
+        }
+    </style>
+    <script defer src="/js/creed-shell.js"></script>
+    <script defer src="/js/creed-data.js"></script>
+    <script defer src="/js/creed-tools.js"></script>
+    <script defer src="/js/i18n.js"></script>
+    <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+</head>
+<body>
+    <creed-nav current="calculator"></creed-nav>
+    <main id="main">
+        <section style="padding: calc(var(--nav-height) + 4rem) 0 var(--space-xl);">
+            <div class="container" style="max-width: 900px; text-align: center;">
+                <p style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: var(--space-md);">Methodology, made visible</p>
+                <h1 style="font-family: var(--font-nav); font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--color-text); letter-spacing: 0.04em; margin-bottom: var(--space-md);">Score Calculator</h1>
+                <p style="color: var(--color-text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto; text-wrap: pretty;">Every C.R.E.E.D. grade comes from one formula. Change the counts to see how a pillar&rsquo;s severity mix becomes a score and a letter grade over the trailing 30-day window &mdash; and whether that grade is published at all.</p>
+            </div>
+        </section>
+        <section style="padding: 0 0 var(--space-3xl);">
+            <div class="container" style="max-width: 1100px;">
+                <div class="tool-grid" style="grid-template-columns: 1fr 1fr;">
+
+                    <form class="glass-panel" style="padding: var(--space-xl);" onsubmit="return false;">
+                        <div id="calc-presets" role="group" aria-label="Presets" style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-lg);"></div>
+
+                        <p class="tool-label">Events in this pillar, last 30 days</p>
+                        <div id="calc-rows" style="display: grid; gap: var(--space-md);"></div>
+
+                        <p class="tool-label" style="margin: var(--space-xl) 0 var(--space-md);">Feed context, for the publication gate</p>
+                        <div style="display: grid; gap: var(--space-md);">
+                            <div class="tool-row">
+                                <label for="calc-pillars" style="font-size: var(--text-sm); color: var(--color-text);">Pillars with events</label>
+                                <input type="range" id="calc-pillars" min="0" max="6" step="1" value="3">
+                                <input type="number" id="calc-pillars-n" min="0" max="6" step="1" value="3" aria-label="Pillars with events" class="tool-field" style="padding: 0.45rem 0.6rem;">
+                            </div>
+                            <div class="tool-row">
+                                <label for="calc-days" style="font-size: var(--text-sm); color: var(--color-text);">Days of history</label>
+                                <input type="range" id="calc-days" min="0" max="90" step="1" value="30">
+                                <input type="number" id="calc-days-n" min="0" step="1" value="30" aria-label="Days of history" class="tool-field" style="padding: 0.45rem 0.6rem;">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div style="display: grid; gap: var(--space-lg);">
+                        <div class="tool-panel" style="padding: var(--space-xl);">
+                            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); flex-wrap: wrap;">
+                                <div style="display: flex; align-items: baseline; gap: var(--space-md);">
+                                    <span id="calc-grade" role="status" style="font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; line-height: 1;">A+</span>
+                                    <span id="calc-score" style="font-family: var(--font-heading); font-size: var(--text-2xl); color: var(--color-text);">100.0%</span>
+                                </div>
+                                <span id="calc-gate" style="font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 6px; padding: 0.3rem 0.7rem;"></span>
+                            </div>
+                            <div style="margin-top: var(--space-lg);">
+                                <div style="position: relative; height: 34px;">
+                                    <svg aria-hidden="true" viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; overflow: visible; pointer-events: none;">
+                                        <line id="calc-marker" x1="100" x2="100" y1="0" y2="10" stroke="#fff" stroke-width="2" vector-effect="non-scaling-stroke"></line>
+                                    </svg>
+                                    <div style="display: flex; height: 100%; border-radius: 6px; overflow: hidden; font-family: var(--font-heading); font-size: 0.65rem; font-weight: 700; color: #000504;">
+                                        <div style="width: 60%; background: #ef4444; display: flex; align-items: center; justify-content: center;">F</div>
+                                        <div style="width: 10%; background: #f97316; display: flex; align-items: center; justify-content: center;">D</div>
+                                        <div style="width: 10%; background: #eab308; display: flex; align-items: center; justify-content: center;">C</div>
+                                        <div style="width: 5%; background: #3b82f6; display: flex; align-items: center; justify-content: center;">B</div>
+                                        <div style="width: 5%; background: #60a5fa; display: flex; align-items: center; justify-content: center;">B+</div>
+                                        <div style="width: 5%; background: #22c55e; display: flex; align-items: center; justify-content: center;">A</div>
+                                        <div style="width: 5%; background: #4ade80; display: flex; align-items: center; justify-content: center;">A+</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--color-text-muted); margin-top: 0.3rem;"><span>0</span><span>60</span><span>70</span><span>80</span><span>90</span><span>100</span></div>
+                            </div>
+                        </div>
+
+                        <div class="tool-panel">
+                            <p style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--space-md);">How it is computed</p>
+                            <pre id="calc-formula" class="tool-pre"></pre>
+                        </div>
+
+                        <div class="tool-panel">
+                            <p style="font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--space-md);">Provisional gates</p>
+                            <ul id="calc-gates" style="list-style: none; padding: 0; margin: 0;"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="tool-note">Per pillar: score = 100 &times; (1 &minus; weighted violation rate), weights info 0 &middot; warning 1 &middot; violation 3 &middot; critical 5, trailing 30 days. The overall is the mean of pillars with at least 100 events; if none qualify, the overall itself is flagged provisional. Grades: A+ &ge; 95 &middot; A &ge; 90 &middot; B+ &ge; 85 &middot; B &ge; 80 &middot; C &ge; 70 &middot; D &ge; 60 &middot; F below. Full method on the <a href="/standard.html">standard</a>.</p>
+            </div>
+        </section>
+    </main>
+    <creed-footer></creed-footer>
+</body>
+</html>
