@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="/css/reduced-motion.css">
-    <link rel="stylesheet" href="/styles.css">
     <style>
         .tool-grid { display: grid; gap: var(--space-xl); align-items: start; }
         .tool-row { display: grid; grid-template-columns: 1fr 140px 90px; gap: var(--space-md); align-items: center; }
@@ -44,6 +43,12 @@
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 </head>
 <body>
+    <!-- Global background layers -->
+    <div class="aurora"></div>
+    <div class="dot-grid"></div>
+    <div class="noise-overlay"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <creed-nav current="badge"></creed-nav>
     <main id="main">
         <section style="padding: calc(var(--nav-height) + 4rem) 0 var(--space-xl);">
